@@ -1,0 +1,66 @@
+//= require_tree ./vendor
+//= require_tree ./lib
+
+body
+  background: #d4d4d4 url("../images/background.png")
+  font-family: sans-serif
+  color: #444
+
+.box
+  width: 800px
+  margin: 20px auto
+
+.welcome
+  color: rgba(0, 0, 0, .3)
+  text-align: center
+  font-weight: bold
+  letter-spacing: -1px
+  text-shadow: 0 1px 0 rgba(255, 255, 255, .5)
+  background: url("../images/hmsk.png") no-repeat center 50px
+  padding: 350px 0 0
+  width: 400px
+  -webkit-animation-name: welcome
+  -webkit-animation-duration: .9s
+  float: left
+
+.summary
+  -webkit-animation-name: contents
+  -webkit-animation-duration: .6s
+  .icons
+    margin-bottom: 10px
+    i
+      font-size: 28px
+      margin-right: 5px
+    a
+      text-decoration: none
+      color: #666
+      &:hover
+        color: #333
+
+  h2
+    text-align: right
+    color: #666
+
+  h3
+    color: #888
+    font-weight: bold
+
+@-webkit-keyframes welcome
+  from
+    -webkit-transform: scale(0)
+    opacity: 0
+  50%
+    -webkit-transform: scale(0)
+    opacity: 0
+  82.5%
+    -webkit-transform: scale(1.03)
+    -webkit-animation-timing-function: ease-out
+    opacity: 1
+  to
+    -webkit-transform: scale(1)
+
+@-webkit-keyframes contents
+  from
+    opacity: 0
+  to
+    opacity: 1
