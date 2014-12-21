@@ -1,0 +1,20 @@
+{
+  "name": "hmsk.github.com",
+  "version": "0.0.1",
+  "homepage": "hmsk.me",
+  "authors": [
+    "hmsk <k.hamasaki@gmail.com>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "Skeleton": "dhg/Skeleton#~2.0.2",
+    "font-awesome": "~4.2.0"
+  }
+}
