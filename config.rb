@@ -67,6 +67,7 @@ configure :build do
   # Minify Javascript on build
   activate :minify_javascript
 
+
   # Enable cache buster
   # activate :cache_buster
 
@@ -81,3 +82,9 @@ configure :build do
   # Or use a different image path
   # set :http_path, "/Content/images/"
 end
+
+ready do
+  sprockets.append_path File.join root, 'bower_components'
+  sprockets.append_path File.join root, 'bower_components', 'font-awesome', 'fonts' # Define directly for including woff to sprockets
+end
+
