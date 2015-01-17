@@ -7,28 +7,8 @@ body_class: index
   %img{ src: "#{gravatar_for('k.hamasaki@gmail.com')}" }
   %p @hmsk / Kengo Hamasaki
   %ul
-    %li
-      %a.button{ href: 'http://pic.hmsk.me/', target: '_blank' }
-        %i.fa.fa-camera
-      %a.button{ href: 'http://hmsk.hatenablog.com/', target: '_blank' }
-        %i.fa.fa-file-text
-      %a.button{ href: 'http://hmsk.hatenablog.jp/', target: '_blank' }
-        %i.fa.fa-pencil
-      %a.button{ href: 'http://amzn.com/w/273IUDAQJR4QQ', target: '_blank' }
-        %i.fa.fa-gift
-    %li
-      %a.button{ href: 'https://twitter.com/hmsk', target: '_blank' }
-        %i.fa.fa-twitter
-      %a.button{ href: 'https://github.com/hmsk', target: '_blank' }
-        %i.fa.fa-github
-      %a.button{ href: 'https://facebook.com/hamachang', target: '_blank' }
-        %i.fa.fa-facebook
-    %li
-      %a.button{ href: 'http://flickr.com/photos/hmsk/', target: '_blank' }
-        %i.fa.fa-flickr
-      %a.button{ href: 'http://instagram.com/hmsk', target: '_blank' }
-        %i.fa.fa-instagram
-      %a.button{ href: 'http://www.linkedin.com/in/khmsk', target: '_blank' }
-        %i.fa.fa-linkedin
-      %a.button{ href: 'http://hmsk.tumblr.com/', target: '_blank' }
-        %i.fa.fa-tumblr
+    - accounts_by_line.each do |line|
+      %li
+        - line.each do |account|
+          %a.button{ href: account['url'], target: '_blank' }
+            %i.fa{ class: 'fa-' + account['icon'] }
