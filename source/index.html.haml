@@ -5,7 +5,10 @@ body_class: index
 
 .container
   %img{ src: "#{gravatar_for('k.hamasaki@gmail.com')}" }
-  %p @hmsk / Kengo Hamasaki
+  %p
+    %strong hmsk / Kengo Hamasaki
+    %a{ href: 'https://keybase.io/hmsk/key.asc', target: '_blank' }
+      %i.fa.fa-key
   %ul
     - accounts_by_line.each do |line|
       %li
