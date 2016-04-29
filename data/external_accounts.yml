@@ -1,33 +1,43 @@
-photo:
-  icon: 'camera'
-  url: 'http://pic.hmsk.me'
 blog:
   icon: 'file-text'
   url: 'http://hmsk.hatenablog.com'
+photo:
+  icon: 'camera-retro'
+  url: 'http://pic.hmsk.me'
 diary:
-  icon: 'pencil'
+  icon: 'paper-plane-o'
   url: 'http://hmsk.hatenablog.jp'
-wishlist:
-  icon: 'gift'
-  url: 'http://www.amazon.co.jp/registry/wishlist/1U1J17EZM8CP1'
-twitter:
-  icon: 'twitter'
-  url: 'https://twitter.com/hmsk'
 github:
   icon: 'github'
   url: 'https://github.com/hmsk'
-facebook:
-  icon: 'facebook'
-  url: 'https://facebook.com/hamachang'
-flickr:
-  icon: 'flickr'
-  url: 'http://flickr.com/photos/hmsk/'
 instagram:
   icon: 'instagram'
   url: 'http://instagram.com/hmsk'
-linkedin:
-  icon: 'linkedin'
-  url: 'http://www.linkedin.com/in/khmsk'
+flickr:
+  icon: 'flickr'
+  url: 'http://flickr.com/photos/hmsk/'
+500px:
+  icon: '500px'
+  url: 'https://500px.com/hmsk'
+twitter:
+  icon: 'twitter-square'
+  url: 'https://twitter.com/hmsk'
+facebook:
+  icon: 'facebook-official'
+  url: 'https://facebook.com/hamachang'
 tumblr:
-  icon: 'tumblr'
+  icon: 'tumblr-square'
   url: 'http://hmsk.tumblr.com/'
+fitbit:
+  icon: 'heartbeat'
+  url: 'https://www.fitbit.com/user/243MYQ'
+angellist:
+  icon: 'angellist'
+  url: 'https://angel.co/hmsk'
+linkedin:
+  icon: 'linkedin-square'
+  url: 'http://www.linkedin.com/in/khmsk'
+wishlist:
+  icon: 'gift'
+  url: 'http://www.amazon.co.jp/registry/wishlist/1U1J17EZM8CP1'
+
