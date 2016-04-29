@@ -34,22 +34,6 @@ GEM
     listen (0.7.3)
     maruku (0.6.1)
       syntax (>= 1.0.0)
-      syntax (>= 1.0.0)
-      syntax (>= 1.0.0)
-      syntax (>= 1.0.0)
-      syntax (>= 1.0.0)
-      syntax (>= 1.0.0)
-      syntax (>= 1.0.0)
-      syntax (>= 1.0.0)
-      syntax (>= 1.0.0)
-      syntax (>= 1.0.0)
-      syntax (>= 1.0.0)
-      syntax (>= 1.0.0)
-      syntax (>= 1.0.0)
-      syntax (>= 1.0.0)
-      syntax (>= 1.0.0)
-      syntax (>= 1.0.0)
-      syntax (>= 1.0.0)
     middleman (3.0.14)
       middleman-core (= 3.0.14)
       middleman-more (= 3.0.14)
@@ -132,3 +116,6 @@ PLATFORMS
 DEPENDENCIES
   middleman (~> 3.0.13)
   middleman-gh-pages
+
+BUNDLED WITH
+   1.11.2
