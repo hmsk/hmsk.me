@@ -1,5 +1,6 @@
 module Me exposing (..)
 
+import Platform
 import Html exposing (Html, div, text, strong, program, p, a, ul, li, i)
 import Html.Attributes exposing (attribute)
 

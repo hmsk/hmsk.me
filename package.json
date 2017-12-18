@@ -1,0 +1,25 @@
+{
+  "name": "elm.hmsk.me",
+  "version": "0.0.1",
+  "description": "襟裳",
+  "main": "index.js",
+  "repository": "https://github.com/hmsk/hmsk.me.git",
+  "author": "hmsk <k.hamasaki@gmail.com>",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "build": "rm -rf dist && mkdir dist && $(yarn bin)/rollup --config rollup.config.js"
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-plugin-external-helpers": "^6.22.0",
+    "babel-plugin-transform-runtime": "^6.23.0",
+    "babel-preset-env": "^1.6.1",
+    "rollup": "^0.52.2",
+    "rollup-plugin-babel": "^3.0.2",
+    "rollup-plugin-commonjs": "^8.2.6",
+    "rollup-plugin-copy": "^0.2.3",
+    "rollup-plugin-elm": "^1.0.3",
+    "serve": "^6.4.2"
+  }
+}

@@ -7,4 +7,6 @@
 
 .DS_Store
 elm-stuff
-
+dist
+node_modules
+yarn-error.log
