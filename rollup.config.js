@@ -12,7 +12,7 @@ export default {
     elm({
       exclude: "elm_stuff/**",
       compiler: {
-        debug: true
+        debug: false
       }
     }),
     commonjs({

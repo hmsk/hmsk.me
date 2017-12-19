@@ -8,7 +8,9 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "build": "rm -rf dist && mkdir dist && $(yarn bin)/rollup --config rollup.config.js"
+    "init": "rm -rf elm-stuff && elm make",
+    "build": "rm -rf dist && mkdir dist && $(yarn bin)/rollup --config rollup.config.js",
+    "serve": "$(yarn bin)/serve dist"
   },
   "devDependencies": {
     "babel-core": "^6.26.0",
