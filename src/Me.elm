@@ -82,5 +82,5 @@ accountHtml (name, icon, url) =
           , attribute "href" url
           , attribute "target" "_blank"
           ]
-          [ i [attribute "class" ("fa-" ++ icon)] [] ]
+          [ i [attribute "class" ("fa fa-" ++ icon)] [] ]
     ]

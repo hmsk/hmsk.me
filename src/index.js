@@ -1,4 +1,6 @@
 import Elm from "./Me.elm";
+const app = Elm.Me.embed(document.getElementById("me"));
 
-const root = document.getElementById("me");
-const app = Elm.Me.embed(root);
+import fontawesome from "@fortawesome/fontawesome";
+import icons from '@fortawesome/fontawesome-free-regular';
+fontawesome.library.add(icons);

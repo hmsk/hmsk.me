@@ -1,3 +1,4 @@
+import resolve from 'rollup-plugin-node-resolve';
 import commonjs from "rollup-plugin-commonjs";
 import elm from "rollup-plugin-elm";
 import copy from "rollup-plugin-copy";
@@ -9,6 +10,7 @@ export default {
     format: "es"
   },
   plugins: [
+    resolve(),
     elm({
       exclude: "elm_stuff/**",
       compiler: {
