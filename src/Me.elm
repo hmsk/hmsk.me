@@ -1,27 +1,27 @@
 module Me exposing (..)
 
 import Platform
-import Html exposing (Html, div, text, strong, program, p, a, ul, li, i)
+import Html exposing (Html, div, text, strong, program, p, a, ul, li, i, img)
 import Html.Attributes exposing (attribute)
 
 type alias Account = (String, String, String)
 
 accounts : List(Account)
 accounts = 
-    [ ("blog", "file-text", "http://hmsk.hatenablog.com")
-    , ("photo", "camera-retro", "http://pic.hmsk.me")
-    , ("diary", "paper-plane-o", "http://hmsk.hatenablog.jp")
-    , ("github", "github", "https://github.com/hmsk")
-    , ("instagram", "instagram", "http://instagram.com/hmsk")
-    , ("flickr", "flickr", "http://flickr.com/photos/hmsk/")
-    , ("500px", "500px", "https://500px.com/hmsk")
-    , ("twitter", "twitter-square", "https://twitter.com/hmsk")
-    , ("facebook", "facebook-official", "https://facebook.com/hamachang")
-    , ("tumblr", "tumblr-square", "http://hmsk.tumblr.com/")
-    , ("fitbit", "heartbeat", "https://www.fitbit.com/user/243MYQ")
-    , ("angellist", "angellist", "https://angel.co/hmsk")
-    , ("linkedin", "linkedin-square", "http://www.linkedin.com/in/khmsk")
-    , ("wishlist", "gift", "http://www.amazon.co.jp/registry/wishlist/1U1J17EZM8CP1")
+    [ ("blog", "fas fa-edit", "http://hmsk.hatenablog.com")
+    , ("photo", "fas fa-camera-retro", "http://pic.hmsk.me")
+    , ("diary", "far fa-sticky-note", "http://hmsk.hatenablog.jp")
+    , ("github", "fab fa-github", "https://github.com/hmsk")
+    , ("instagram", "fab fa-instagram", "http://instagram.com/hmsk")
+    , ("flickr", "fab fa-flickr", "http://flickr.com/photos/hmsk/")
+    , ("500px", "fab fa-500px", "https://500px.com/hmsk")
+    , ("twitter", "fab fa-twitter", "https://twitter.com/hmsk")
+    , ("facebook", "fab fa-facebook", "https://facebook.com/hamachang")
+    , ("tumblr", "fab fa-tumblr-square", "http://hmsk.tumblr.com/")
+    , ("fitbit", "fas fa-heartbeat", "https://www.fitbit.com/user/243MYQ")
+    , ("angellist", "fab fa-angellist", "https://angel.co/hmsk")
+    , ("linkedin", "fab fa-linkedin", "http://www.linkedin.com/in/khmsk")
+    , ("wishlist", "fas fa-gift", "http://www.amazon.co.jp/registry/wishlist/1U1J17EZM8CP1")
     ]
 
 -- MODEL
@@ -40,11 +40,14 @@ type Msg
 -- VIEW
 view : Model -> Html Msg
 view model =
-    div [ attribute "class" "container"]
-    [ p []
-        [ strong [] [text "hmsk / Kengo Hamasaki"]
-        , a [ attribute "href" "https://keybase.io/hmsk/key.asc", attribute "target" "_blank"] [text "key"]
-        , a [ attribute "href" "http://haiji.co", attribute "target" "_blank"] [text "partner"]
+    div [ attribute "class" "container" ]
+    [ img [ attribute "src" "https://www.gravatar.com/avatar/8358fe546d1b082b163f18a02eec145d?s=320" ] []
+    , p [ attribute "class" "name" ]
+        [ strong [] [text "@hmsk / Kengo Hamasaki"]
+        , a [ attribute "href" "https://keybase.io/hmsk/key.asc", attribute "target" "_blank"]
+            [ i [ attribute "class" "fas fa-key" ] [] ]
+        , a [ attribute "href" "http://haiji.co", attribute "target" "_blank"]
+            [ i [ attribute "class" "fas fa-heart" ] [] ]
         ]
     , ul [] (listedAccountHtml model.accounts)
     ]
@@ -82,5 +85,5 @@ accountHtml (name, icon, url) =
           , attribute "href" url
           , attribute "target" "_blank"
           ]
-          [ i [attribute "class" ("fa fa-" ++ icon)] [] ]
+          [ i [attribute "class" icon] [] ]
     ]
