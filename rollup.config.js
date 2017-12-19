@@ -10,6 +10,9 @@ export default {
     file: "dist/bundle.js",
     format: "es"
   },
+  watch: {
+    include: "src/*"
+  },
   plugins: [
     resolve(),
     sass({
