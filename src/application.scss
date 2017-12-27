@@ -1,9 +1,13 @@
 body {
   background: url('/background.png');
   background-repeat: repeat;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .container {
+  position: relative;
   padding-top: 10%;
   p.name {
     margin-top: 10px;
@@ -29,27 +33,19 @@ body {
     border-radius: 60px;
   }
   ul {
+    position: absolute;
+    top: 38px;
+    left: 0;
+    right: 0;
+    width: 50px;
+    margin-left: auto;
+    margin-right: auto;
     list-style-type: none;
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    width: 280px;
-    margin: 0 auto;
     padding: 0;
     li {
       text-align: center;
-      flex-basis: 33.33%;
-      &:nth-child(n+1):nth-child(-n+4),
-      &:nth-child(n+8):nth-child(-n+11),
-      &:nth-child(n+15):nth-child(-n+18) {
-        flex-basis: 25%;
-      }
-      &:nth-child(7n+5) {
-        text-align: right;
-      }
-      &:nth-child(7n+7) {
-        text-align: left;
-      }
+      position: absolute;
+      top: 0;
       a.button {
         margin: 8px 0;
         width: 48px;

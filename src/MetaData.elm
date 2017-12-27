@@ -3,7 +3,7 @@ module MetaData exposing (..)
 type alias Account = (String, String, String)
 
 myName : String
-myName = "@hmsk / Kengo Hamasaki"
+myName = "@hmsk"
 
 iconUrl : String
 iconUrl = "https://www.gravatar.com/avatar/8358fe546d1b082b163f18a02eec145d?s=320"

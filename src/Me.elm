@@ -2,7 +2,7 @@ module Me exposing (..)
 
 import Platform
 import Html exposing (Html, div, text, strong, program, p, a, ul, li, i, img)
-import Html.Attributes exposing (attribute)
+import Html.Attributes exposing (attribute, style)
 import MetaData exposing (..)
 
 -- MODEL
@@ -25,7 +25,7 @@ view model =
     [ img [ attribute "src" MetaData.iconUrl ] []
     , p [ attribute "class" "name" ]
         ([ strong [] [ text MetaData.myName ] ] ++ profilesLinksHtml MetaData.profiles)
-    , ul [] (listedAccountHtml model.accounts)
+    , ul [] (circleAccountList model.accounts)
     ]
 
 -- UPDATE
@@ -59,16 +59,25 @@ profileLink (_, icon, url) =
     a [ attribute "href" url, attribute "target" "_blank"]
       [ i [ attribute "class" icon ] [] ]
 
-listedAccountHtml : List(Account) -> List(Html msg)
-listedAccountHtml (accounts) =
-    List.map accountHtml accounts
+circleAccountList : List(Account) -> List(Html msg)
+circleAccountList (accounts) =
+    List.indexedMap (\i account -> circleAccountHtml account (List.length accounts) i) accounts
 
-accountHtml : Account -> Html msg
-accountHtml (name, icon, url) =
-    li [] [
+circleAccountHtml : Account -> Int -> Int -> Html msg
+circleAccountHtml (name, icon, url) len num =
+    li [myStyle len num] [
         a [ attribute "class" "button"
-          , attribute "href" url
-          , attribute "target" "_blank"
-          ]
-          [ i [attribute "class" icon] [] ]
+        , attribute "href" url
+        , attribute "target" "_blank"
+        ]
+        [ i [attribute "class" icon] [] ]
     ]
+
+myStyle : Int -> Int -> Html.Attribute msg
+myStyle len num =
+    let
+        deg = 360 / toFloat(len) * toFloat(num)
+    in
+        style
+            [ ("transform", "rotate(" ++ toString deg ++ "deg) translateY(-160px) rotate(" ++ toString (deg * -1) ++ "deg)")
+            ]
