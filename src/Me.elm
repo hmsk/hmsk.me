@@ -13,13 +13,23 @@ radius : Int
 radius =
     160
 
+-- MAIN
+main : Program Never Model Msg
+main =
+    program
+        { init = init
+        , view = view
+        , update = update
+        , subscriptions = subscriptions
+        }
+
 -- MODEL
 type alias Model =
     { accounts: List(Account)
     , rotation: Int
     }
 
-init : ( Model, Cmd Msg )
+init : (Model, Cmd Msg)
 init =
     ({ accounts = MetaData.accounts
     ,  rotation = 0
@@ -28,6 +38,21 @@ init =
 -- MESSAGES
 type Msg
     = Presses Char
+
+-- UPDATE
+update : Msg -> Model -> (Model, Cmd Msg)
+update msg model =
+    case msg of
+        Presses code ->
+            case code of
+                'j' -> ({ model | rotation = model.rotation + 1 }, Cmd.none)
+                'k' -> ({ model | rotation = model.rotation - 1 }, Cmd.none)
+                _   -> (model, Cmd.none)
+
+-- SUBSCRIPTIONS
+subscriptions : Model -> Sub Msg
+subscriptions model =
+    Keyboard.presses (\code -> Presses (fromCode code))
 
 -- VIEW
 view : Model -> Html Msg
@@ -57,34 +82,6 @@ selectedAccountName model =
             Just (name, _, _) -> text name
             Nothing -> text ""
 
--- UPDATE
-update : Msg -> Model -> ( Model, Cmd Msg )
-update msg model =
-    case msg of
-        Presses code ->
-            case code of
-                'j' ->
-                    ({ model | rotation = model.rotation + 1 }, Cmd.none)
-                'k' ->
-                    ({ model | rotation = model.rotation - 1 }, Cmd.none)
-                _ ->
-                    (model, Cmd.none)
-
--- SUBSCRIPTIONS
-subscriptions : Model -> Sub Msg
-subscriptions model =
-    Keyboard.presses (\code -> Presses (fromCode code))
-
--- MAIN
-main : Program Never Model Msg
-main =
-    program
-        { init = init
-        , view = view
-        , update = update
-        , subscriptions = subscriptions
-        }
-
 profilesLinksHtml : List(Account) -> List(Html msg)
 profilesLinksHtml (accounts) =
     List.map profileLink  accounts
@@ -102,21 +99,22 @@ circleAccountHtml : Account -> Int -> Int -> Int -> Html msg
 circleAccountHtml (name, icon, url) len num rotation =
     li [circularStyle len num rotation] [
         a [ attribute "class" "button"
-        , attribute "href" url
-        , attribute "target" "_blank"
+          , attribute "href" url
+          , attribute "target" "_blank"
         ]
         [ i [attribute "class" icon] [] ]
     ]
 
 circularStyle : Int -> Int -> Int -> Html.Attribute msg
-circularStyle len num rotation =
+circularStyle len index rotation =
     let
         one = 360 / toFloat(len)
-        deg = one * toFloat(num) - one * toFloat(rotation)
+        rotatedDegree = one * toFloat(index - rotation)
+        radiusText = toString radius ++ "px"
     in
         style
-            [ ( "transform"
-              , "rotate(" ++ toString deg ++ "deg) translateY(-" ++ toString (radius) ++ "px) rotate(" ++ toString (deg * -1) ++ "deg)")
-            , ( "transition"
+            [ ("transform"
+              , "rotate(" ++ toString rotatedDegree ++ "deg) translateY(-" ++ radiusText ++ ") rotate(" ++ toString (rotatedDegree * -1) ++ "deg)")
+            , ("transition"
               , "0.8s ease-in-out")
             ]
