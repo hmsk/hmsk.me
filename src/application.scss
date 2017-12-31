@@ -1,4 +1,10 @@
+@font-face {
+  font-family: 'PressStart2P';
+  src: url('/ps2.ttf') format('truetype');
+}
+
 body {
+  font-family: 'PressStart2P', 'Helvetica', sans-serif;
   background: url('/background.png');
   background-repeat: repeat;
   display: flex;
@@ -9,8 +15,9 @@ body {
 .container {
   position: relative;
   padding-top: 10%;
-  p.name {
-    margin-top: 10px;
+  p {
+    margin-top: 5px;
+    margin-bottom: 10px;
     color: #666;
     text-align: center;
     a {

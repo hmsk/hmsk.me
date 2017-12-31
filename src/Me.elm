@@ -23,8 +23,8 @@ view : Model -> Html Msg
 view model =
     div [ attribute "class" "container" ]
     [ img [ attribute "src" MetaData.iconUrl ] []
-    , p [ attribute "class" "name" ]
-        ([ strong [] [ text MetaData.myName ] ] ++ profilesLinksHtml MetaData.profiles)
+    , p [ attribute "class" "name" ] [ text MetaData.myName ]
+    , p [] (profilesLinksHtml MetaData.profiles)
     , ul [] (circleAccountList model.accounts)
     ]
 
