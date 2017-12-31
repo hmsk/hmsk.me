@@ -65,7 +65,7 @@ circleAccountList (accounts) =
 
 circleAccountHtml : Account -> Int -> Int -> Html msg
 circleAccountHtml (name, icon, url) len num =
-    li [myStyle len num] [
+    li [circularStyle len num] [
         a [ attribute "class" "button"
         , attribute "href" url
         , attribute "target" "_blank"
@@ -73,8 +73,8 @@ circleAccountHtml (name, icon, url) len num =
         [ i [attribute "class" icon] [] ]
     ]
 
-myStyle : Int -> Int -> Html.Attribute msg
-myStyle len num =
+circularStyle : Int -> Int -> Html.Attribute msg
+circularStyle len num =
     let
         deg = 360 / toFloat(len) * toFloat(num)
     in
