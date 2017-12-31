@@ -5,8 +5,13 @@ import Html exposing (Html, div, text, strong, program, p, a, ul, li, i, img)
 import Html.Attributes exposing (attribute, style)
 import Keyboard exposing (..)
 import Char exposing (fromCode)
+import Array exposing (..)
 
 import MetaData exposing (..)
+
+radius : Int
+radius =
+    160
 
 -- MODEL
 type alias Model =
@@ -32,7 +37,25 @@ view model =
     , p [ attribute "class" "name" ] [ text MetaData.myName ]
     , p [] (profilesLinksHtml MetaData.profiles)
     , ul [] (circleAccountList model.accounts model.rotation)
+    , div [ style [("transform", "translateY(-" ++ toString(radius) ++"px)")], attribute "id" "cursor" ] []
+    , p [ style [("transform", "translateY(-" ++ toString(radius) ++"px)")], attribute "id" "selection" ] [selectedAccountName model]
     ]
+
+selectedAccountName : Model -> Html Msg
+selectedAccountName model =
+    let
+        len = List.length(model.accounts)
+        index =
+            if model.rotation < 0 then
+                len - (-1 * model.rotation % len)
+            else
+                model.rotation % len
+
+        selected = Array.get index (Array.fromList (model.accounts))
+    in
+        case selected of
+            Just (name, _, _) -> text name
+            Nothing -> text ""
 
 -- UPDATE
 update : Msg -> Model -> ( Model, Cmd Msg )
@@ -89,9 +112,11 @@ circularStyle : Int -> Int -> Int -> Html.Attribute msg
 circularStyle len num rotation =
     let
         one = 360 / toFloat(len)
-        deg = one * toFloat(num) + one * toFloat(rotation)
+        deg = one * toFloat(num) - one * toFloat(rotation)
     in
         style
-            [ ("transform", "rotate(" ++ toString deg ++ "deg) translateY(-160px) rotate(" ++ toString (deg * -1) ++ "deg)")
-            , ("transition", "0.8s ease-in-out")
+            [ ( "transform"
+              , "rotate(" ++ toString deg ++ "deg) translateY(-" ++ toString (radius) ++ "px) rotate(" ++ toString (deg * -1) ++ "deg)")
+            , ( "transition"
+              , "0.8s ease-in-out")
             ]
