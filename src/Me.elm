@@ -116,5 +116,5 @@ circularStyle len index rotation =
             [ ("transform"
               , "rotate(" ++ toString rotatedDegree ++ "deg) translateY(-" ++ radiusText ++ ") rotate(" ++ toString (rotatedDegree * -1) ++ "deg)")
             , ("transition"
-              , "0.8s ease-in-out")
+              , "0.25s ease-in-out")
             ]
