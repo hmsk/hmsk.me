@@ -38,8 +38,13 @@ body {
     height: 120px;
     margin: 0 auto 25px auto;
     border-radius: 60px;
+    cursor: pointer;
+    &:hover {
+      opacity: .8;
+    }
   }
   ul {
+    display: none;
     position: absolute;
     top: 38px;
     left: 0;
@@ -76,6 +81,9 @@ body {
           color: #666;
         }
       }
+    }
+    &.opened {
+      display: block;
     }
   }
   #cursor {

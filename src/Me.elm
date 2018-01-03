@@ -1,13 +1,22 @@
 module Me exposing (..)
 
-import Platform
 import Html exposing (Html, div, text, strong, program, p, a, ul, li, i, img)
 import Html.Attributes exposing (attribute, style)
+import Html.Events exposing (onClick)
 import Keyboard exposing (..)
 import Char exposing (fromCode)
 import Array exposing (..)
+import Time exposing (millisecond)
+import Process exposing (sleep)
+import Task exposing (perform)
 
 import MetaData exposing (..)
+
+type MenuTransition
+    = Closed
+    | AnimateToClosed
+    | AnimateToOpened
+    | Opened
 
 radius : Int
 radius =
@@ -26,18 +35,27 @@ main =
 -- MODEL
 type alias Model =
     { accounts: List(Account)
+    , menuOpened: MenuTransition
     , rotation: Int
     }
 
 init : (Model, Cmd Msg)
 init =
     ({ accounts = MetaData.accounts
+    ,  menuOpened = Closed
     ,  rotation = 0
     }, Cmd.none)
+
+delayedCmd : Msg -> Int -> Cmd Msg
+delayedCmd msg msec =
+    Process.sleep (toFloat msec * millisecond)
+        |> Task.perform (\_ -> msg)
 
 -- MESSAGES
 type Msg
     = Presses Char
+    | ToggleMenu
+    | AnimationEnd
 
 -- UPDATE
 update : Msg -> Model -> (Model, Cmd Msg)
@@ -48,6 +66,22 @@ update msg model =
                 'j' -> ({ model | rotation = model.rotation + 1 }, Cmd.none)
                 'k' -> ({ model | rotation = model.rotation - 1 }, Cmd.none)
                 _   -> (model, Cmd.none)
+        ToggleMenu ->
+            case model.menuOpened of
+                Closed ->
+                    ({ model | menuOpened = AnimateToOpened }, delayedCmd AnimationEnd 100)
+                Opened ->
+                    ({ model | menuOpened = AnimateToClosed }, delayedCmd AnimationEnd 200)
+                _ ->
+                    (model, Cmd.none)
+        AnimationEnd ->
+            case model.menuOpened of
+                AnimateToOpened ->
+                    ({ model | menuOpened = Opened }, Cmd.none)
+                AnimateToClosed ->
+                    ({ model | menuOpened = Closed }, Cmd.none)
+                _ ->
+                    (model, Cmd.none)
 
 -- SUBSCRIPTIONS
 subscriptions : Model -> Sub Msg
@@ -58,13 +92,25 @@ subscriptions model =
 view : Model -> Html Msg
 view model =
     div [ attribute "class" "container" ]
-    [ img [ attribute "src" MetaData.iconUrl ] []
+    [ img [ attribute "src" MetaData.iconUrl, onClick ToggleMenu ] []
     , p [ attribute "class" "name" ] [ text MetaData.myName ]
     , p [] (profilesLinksHtml MetaData.profiles)
-    , ul [] (circleAccountList model.accounts model.rotation)
-    , div [ style [("transform", "translateY(-" ++ toString(radius) ++"px)")], attribute "id" "cursor" ] []
-    , p [ style [("transform", "translateY(-" ++ toString(radius) ++"px)")], attribute "id" "selection" ] [selectedAccountName model]
+    , ul [openedClass model.menuOpened] (circleAccountList model)
+    , div [ style [translateFromCenterStyle, openedStyle model.menuOpened], attribute "id" "cursor" ] []
+    , p [ style [translateFromCenterStyle, openedStyle model.menuOpened], attribute "id" "selection" ] [selectedAccountName model]
     ]
+
+openedStyle : MenuTransition -> (String, String)
+openedStyle opened =
+    ("display", if opened == Opened then "block" else "none")
+
+openedClass : MenuTransition -> Html.Attribute msg
+openedClass opened =
+    attribute "class" (if opened == Closed then "" else "opened")
+
+translateFromCenterStyle : (String, String)
+translateFromCenterStyle =
+    ("transform", "translateY(-" ++ toString(radius) ++"px)")
 
 selectedAccountName : Model -> Html Msg
 selectedAccountName model =
@@ -91,30 +137,42 @@ profileLink (_, icon, url) =
     a [ attribute "href" url, attribute "target" "_blank"]
       [ i [ attribute "class" icon ] [] ]
 
-circleAccountList : List(Account) -> Int -> List(Html msg)
-circleAccountList accounts rotation =
-    List.indexedMap (\i account -> circleAccountHtml account (List.length accounts) i rotation) accounts
+circleAccountList : Model -> List(Html Msg)
+circleAccountList model =
+    List.indexedMap (\index account -> circleAccountHtml model account index) accounts
 
-circleAccountHtml : Account -> Int -> Int -> Int -> Html msg
-circleAccountHtml (name, icon, url) len num rotation =
-    li [circularStyle len num rotation] [
+circleAccountHtml : Model -> Account -> Int -> Html Msg
+circleAccountHtml model (_, icon, url) index =
+    li [circularStyle model index] [
         a [ attribute "class" "button"
-          , attribute "href" url
-          , attribute "target" "_blank"
+        , attribute "href" url
+        , attribute "target" "_blank"
         ]
         [ i [attribute "class" icon] [] ]
     ]
 
-circularStyle : Int -> Int -> Int -> Html.Attribute msg
-circularStyle len index rotation =
+circularStyle : Model -> Int -> Html.Attribute msg
+circularStyle model index =
     let
-        one = 360 / toFloat(len)
-        rotatedDegree = one * toFloat(index - rotation)
-        radiusText = toString radius ++ "px"
+        apexCount = List.length model.accounts
+        one = 360 / toFloat(apexCount)
+        rotatedDegree =
+            case model.menuOpened of
+                Opened ->
+                    one * toFloat(index - model.rotation)
+                _ ->
+                    one * toFloat(index - model.rotation) - one
+        distanceFromCenter =
+            case model.menuOpened of 
+                Opened ->
+                    "translateY(-" ++ toString radius ++ "px)"
+                _ ->
+                    "translateY(-" ++ toString (radius + 500) ++ "px)"
+
     in
         style
             [ ("transform"
-              , "rotate(" ++ toString rotatedDegree ++ "deg) translateY(-" ++ radiusText ++ ") rotate(" ++ toString (rotatedDegree * -1) ++ "deg)")
+              , "rotate(" ++ toString rotatedDegree ++ "deg) " ++ distanceFromCenter ++ "rotate(" ++ toString (rotatedDegree * -1) ++ "deg)")
             , ("transition"
               , "0.25s ease-in-out")
             ]
