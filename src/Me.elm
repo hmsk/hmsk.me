@@ -93,7 +93,7 @@ view : Model -> Html Msg
 view model =
     div [ attribute "class" "container" ]
     [ img [ attribute "src" MetaData.iconUrl, onClick ToggleMenu ] []
-    , p [ attribute "class" "name" ] [ text MetaData.myName ]
+    , p [ attribute "class" "name" ] [ text (if model.menuOpened == Opened then "<K " ++ MetaData.myName ++ " J>" else MetaData.myName) ]
     , p [] (profilesLinksHtml MetaData.profiles)
     , ul [openedClass model.menuOpened] (circleAccountList model)
     , div [ style [translateFromCenterStyle, openedStyle model.menuOpened], attribute "id" "cursor" ] []
