@@ -161,7 +161,7 @@ circularStyle model index =
                 Opened ->
                     one * toFloat(index - model.rotation)
                 _ ->
-                    one * toFloat(index - model.rotation) - one
+                    one * toFloat(index - model.rotation - 2)
         distanceFromCenter =
             case model.menuOpened of 
                 Opened ->
