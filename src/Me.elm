@@ -47,8 +47,7 @@ init =
 
 delayedCmd : Msg -> Int -> Cmd Msg
 delayedCmd msg msec =
-    Process.sleep (toFloat msec * millisecond)
-        |> Task.perform (\_ -> msg)
+    toFloat msec * millisecond |> Process.sleep |> Task.perform (\_ -> msg)
 
 -- MESSAGES
 type Msg
@@ -77,7 +76,7 @@ update msg model =
 -- SUBSCRIPTIONS
 subscriptions : Model -> Sub Msg
 subscriptions model =
-    Keyboard.presses (\code -> Presses (fromCode code))
+    Keyboard.presses (Presses << fromCode)
 
 -- VIEW
 view : Model -> Html Msg
