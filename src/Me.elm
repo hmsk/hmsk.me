@@ -76,9 +76,9 @@ update msg model =
             ({ model | rotation = model.rotation - 1 }, Cmd.none)
         (TakeWheel delta, Opened) ->
             if not model.wheelLocked && delta > 20 then
-                ({ model | rotation = model.rotation + 1, wheelLocked = True }, delayedCmd WheelUnlock 500)
+                ({ model | rotation = model.rotation + 1, wheelLocked = True }, delayedCmd WheelUnlock 200)
             else if not model.wheelLocked && delta < -20 then
-                ({ model | rotation = model.rotation - 1, wheelLocked = True }, delayedCmd WheelUnlock 500)
+                ({ model | rotation = model.rotation - 1, wheelLocked = True }, delayedCmd WheelUnlock 200)
             else
                 (model, Cmd.none)
         (WheelUnlock, _) ->
@@ -119,7 +119,7 @@ view model =
         ] [
         div [ attribute "id" "content" ] [
             img [ attribute "src" MetaData.iconUrl, onClick ToggleRing ] []
-            , p [ attribute "class" "name" ] [ text (if model.ringOpened == Opened then "<K " ++ MetaData.myName ++ " J>" else MetaData.myName) ]
+            , p [ attribute "class" "name" ] [ text MetaData.myName ]
             , p [] (profilesLinksHtml MetaData.profiles)
             , ul [openedClass model.ringOpened] (circleAccountList model)
             , div [ style [translateFromCenterStyle, openedStyle model.ringOpened], attribute "id" "cursor" ] []
