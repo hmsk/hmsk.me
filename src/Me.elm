@@ -9,6 +9,8 @@ import Time exposing (millisecond)
 import Process exposing (sleep)
 import Task exposing (perform)
 import Json.Decode as Json
+import Touch exposing (..)
+import SingleTouch exposing (onMove)
 
 import MetaData exposing (..)
 
@@ -38,6 +40,7 @@ type alias Model =
     , ringOpened: RingAppearance
     , rotation: Int
     , wheelLocked: Bool
+    , lastTouch: (Float, Float)
     }
 
 init : (Model, Cmd Msg)
@@ -46,6 +49,7 @@ init =
     ,  ringOpened = Closed
     ,  rotation = 0
     ,  wheelLocked = False
+    ,  lastTouch = (0, 0)
     }, Cmd.none)
 
 delayedCmd : Msg -> Int -> Cmd Msg
@@ -59,6 +63,8 @@ type Msg
     | AnimationEnd
     | TakeWheel Int
     | WheelUnlock
+    | TouchMoved Touch.Coordinates
+    | TouchReset
 
 -- UPDATE
 update : Msg -> Model -> (Model, Cmd Msg)
@@ -77,6 +83,18 @@ update msg model =
                 (model, Cmd.none)
         (WheelUnlock, _) ->
             ({ model | wheelLocked = False }, Cmd.none)
+        (TouchMoved touch, _) ->
+            if model.lastTouch == (0, 0) then
+                ({ model | lastTouch = (touch.clientX, touch.clientY) }, Cmd.none)
+            else
+                if touch.clientY - Tuple.second model.lastTouch > 50 then
+                    ({ model | rotation = model.rotation - 1, lastTouch = (touch.clientX, touch.clientY) }, delayedCmd TouchReset 50)
+                else if touch.clientY - Tuple.second model.lastTouch < -50 then
+                    ({ model | rotation = model.rotation + 1, lastTouch = (touch.clientX, touch.clientY) }, delayedCmd TouchReset 50)
+                else
+                    (model, Cmd.none)
+        (TouchReset, _) ->
+            ({ model | lastTouch = (0, 0) }, Cmd.none)
         (ToggleRing, Closed) ->
             ({ model | ringOpened = AnimateToOpened }, delayedCmd AnimationEnd 100)
         (ToggleRing, Opened) ->
@@ -95,7 +113,10 @@ subscriptions model =
 -- VIEW
 view : Model -> Html Msg
 view model =
-    div [ onWheel TakeWheel, attribute "id" "container" ] [
+    div [ onWheel TakeWheel
+        , onMove TouchMoved
+        , attribute "id" "container"
+        ] [
         div [ attribute "id" "content" ] [
             img [ attribute "src" MetaData.iconUrl, onClick ToggleRing ] []
             , p [ attribute "class" "name" ] [ text (if model.ringOpened == Opened then "<K " ++ MetaData.myName ++ " J>" else MetaData.myName) ]
