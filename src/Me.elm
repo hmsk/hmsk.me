@@ -146,6 +146,8 @@ selectedAccountName model =
         index =
             if model.rotation < 0 then
                 len - (-1 * model.rotation % len)
+            else if model.rotation == 0 then
+                0
             else
                 model.rotation % len
         selected = List.head <| List.drop index model.accounts
