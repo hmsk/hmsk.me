@@ -92,16 +92,16 @@ update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
     case ( msg, model.ringOpened ) of
         ( Presses 'j', Opened ) ->
-            ( { model | rotation = model.rotation + 1 }, Cmd.none )
+            ( { model | rotation = rotate model.rotation Clockwise }, Cmd.none )
 
         ( Presses 'k', Opened ) ->
-            ( { model | rotation = model.rotation - 1 }, Cmd.none )
+            ( { model | rotation = rotate model.rotation CounterClockwise }, Cmd.none )
 
         ( TakeWheel delta, Opened ) ->
             if not model.wheelLocked && delta > 20 then
-                ( { model | rotation = model.rotation + 1, wheelLocked = True }, delayedCmd WheelUnlock 200 )
+                ( { model | rotation = rotate model.rotation CounterClockwise, wheelLocked = True }, delayedCmd WheelUnlock 200 )
             else if not model.wheelLocked && delta < -20 then
-                ( { model | rotation = model.rotation - 1, wheelLocked = True }, delayedCmd WheelUnlock 200 )
+                ( { model | rotation = rotate model.rotation Clockwise, wheelLocked = True }, delayedCmd WheelUnlock 200 )
             else
                 ( model, Cmd.none )
 
@@ -112,9 +112,9 @@ update msg model =
             if model.lastTouch == ( 0, 0 ) then
                 ( { model | lastTouch = ( touch.clientX, touch.clientY ) }, Cmd.none )
             else if touch.clientY - Tuple.second model.lastTouch > 50 then
-                ( { model | rotation = model.rotation - 1, lastTouch = ( touch.clientX, touch.clientY ) }, delayedCmd TouchReset 50 )
+                ( { model | rotation = rotate model.rotation Clockwise, lastTouch = ( touch.clientX, touch.clientY ) }, delayedCmd TouchReset 50 )
             else if touch.clientY - Tuple.second model.lastTouch < -50 then
-                ( { model | rotation = model.rotation + 1, lastTouch = ( touch.clientX, touch.clientY ) }, delayedCmd TouchReset 50 )
+                ( { model | rotation = rotate model.rotation CounterClockwise, lastTouch = ( touch.clientX, touch.clientY ) }, delayedCmd TouchReset 50 )
             else
                 ( model, Cmd.none )
 
@@ -135,6 +135,21 @@ update msg model =
 
         _ ->
             ( model, Cmd.none )
+
+
+type RotateDirection
+    = Clockwise
+    | CounterClockwise
+
+
+rotate : Int -> RotateDirection -> Int
+rotate current direction =
+    case direction of
+        Clockwise ->
+            current - 1
+
+        CounterClockwise ->
+            current + 1
 
 
 
