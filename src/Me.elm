@@ -214,13 +214,19 @@ selectedAccountName model =
         len =
             List.length (model.accounts)
 
-        index =
+        normalizedRotation =
             if model.rotation < 0 then
                 len - (-1 * model.rotation % len)
             else if model.rotation == 0 then
                 0
             else
                 model.rotation % len
+
+        index =
+            if normalizedRotation == len then
+                0
+            else
+                normalizedRotation
 
         selected =
             List.head <| List.drop index model.accounts
