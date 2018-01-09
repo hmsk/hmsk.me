@@ -122,7 +122,7 @@ update msg model =
             ( { model | lastTouch = ( 0, 0 ) }, Cmd.none )
 
         ( ToggleRing, Closed ) ->
-            ( { model | ringOpened = AnimateToOpened }, delayedCmd AnimationEnd 100 )
+            ( { model | ringOpened = AnimateToOpened }, delayedCmd AnimationEnd 20 )
 
         ( ToggleRing, Opened ) ->
             ( { model | ringOpened = AnimateToClosed }, delayedCmd AnimationEnd 200 )
@@ -286,7 +286,7 @@ circularStyle model index =
 
                 _ ->
                     ( one * toFloat (index - model.rotation - 2)
-                    , "translateY(-" ++ toString (radius + 500) ++ "px)"
+                    , "translateY(-" ++ toString (radius + 500 + 660) ++ "px)"
                     )
     in
         style
@@ -294,7 +294,7 @@ circularStyle model index =
               , "rotate(" ++ toString rotatedDegree ++ "deg) " ++ distanceFromCenter ++ "rotate(" ++ toString (rotatedDegree * -1) ++ "deg)"
               )
             , ( "transition"
-              , "0.25s ease-in-out"
+              , "0.50s ease-in-out"
               )
             ]
 
