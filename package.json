@@ -9,7 +9,7 @@
   "private": true,
   "scripts": {
     "init": "rm -rf elm-stuff && elm make",
-    "build": "rm -rf dist && mkdir dist && $(yarn bin)/rollup --config rollup.config.js",
+    "build": "rm -rf dist && mkdir dist && $(yarn bin)/rollup --config rollup.config.js --environment BUILD:production",
     "serve": "$(yarn bin)/serve dist",
     "dev": "$(yarn bin)/rollup --config rollup.config.js --watch",
     "deploy": "$(yarn bin)/gh-pages -d dist"

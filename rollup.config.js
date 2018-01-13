@@ -21,7 +21,7 @@ export default {
     elm({
       exclude: "elm_stuff/**",
       compiler: {
-        debug: false
+        debug: process.env.BUILD !== "production"
       }
     }),
     commonjs({
