@@ -19,7 +19,7 @@
     "babel-plugin-transform-runtime": "^6.23.0",
     "babel-preset-env": "^1.6.1",
     "gh-pages": "^1.1.0",
-    "rollup": "^0.52.2",
+    "rollup": "^0.54.0",
     "rollup-plugin-babel": "^3.0.2",
     "rollup-plugin-commonjs": "^8.2.6",
     "rollup-plugin-copy": "^0.2.3",
