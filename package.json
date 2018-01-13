@@ -10,7 +10,6 @@
   "scripts": {
     "init": "rm -rf elm-stuff && elm make",
     "build": "rm -rf dist && mkdir dist && $(yarn bin)/rollup --config rollup.config.js --environment BUILD:production",
-    "serve": "$(yarn bin)/serve dist",
     "dev": "$(yarn bin)/rollup --config rollup.config.js --watch",
     "deploy": "$(yarn bin)/gh-pages -d dist"
   },
@@ -27,6 +26,6 @@
     "rollup-plugin-elm": "^1.0.3",
     "rollup-plugin-node-resolve": "^3.0.0",
     "rollup-plugin-sass": "^0.5.3",
-    "serve": "^6.4.2"
+    "rollup-plugin-serve": "^0.4.2"
   }
 }
