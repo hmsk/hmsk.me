@@ -82,6 +82,7 @@ type Msg
     | WheelUnlock
     | TouchMoved Touch.Coordinates
     | TouchReset
+    | RotateRingTo Int
 
 
 
@@ -96,6 +97,28 @@ update msg model =
 
         ( Presses 'k', Opened ) ->
             ( { model | rotation = rotate model.rotation CounterClockwise }, Cmd.none )
+
+        ( RotateRingTo index, Opened ) ->
+            let
+                len =
+                    List.length (model.accounts)
+
+                currentIndex =
+                    normalizedRotation model.rotation len
+
+                diff =
+                    index - currentIndex
+
+                next =
+                    if toFloat (abs diff) < toFloat (len) / 2 then
+                        diff
+                    else if toFloat (currentIndex) < toFloat (len) / 2 then
+                        diff - len
+                    else
+                        diff + len
+            in
+                -- Should express based on RotateDirection
+                ( { model | rotation = model.rotation + next }, Cmd.none )
 
         ( TakeWheel delta, Opened ) ->
             if not model.wheelLocked && delta > 20 then
@@ -150,6 +173,20 @@ rotate current direction =
 
         CounterClockwise ->
             current + 1
+
+
+normalizedRotation : Int -> Int -> Int
+normalizedRotation currentRotation listLength =
+    let
+        remainder =
+            abs currentRotation % listLength
+    in
+        if currentRotation == 0 || remainder == 0 then
+            0
+        else if currentRotation < 0 then
+            listLength - remainder
+        else
+            remainder
 
 
 
@@ -211,25 +248,11 @@ translateFromCenterStyle =
 selectedAccountName : Model -> Html Msg
 selectedAccountName model =
     let
-        len =
-            List.length (model.accounts)
-
-        normalizedRotation =
-            if model.rotation < 0 then
-                len - (-1 * model.rotation % len)
-            else if model.rotation == 0 then
-                0
-            else
-                model.rotation % len
-
-        index =
-            if normalizedRotation == len then
-                0
-            else
-                normalizedRotation
+        currentIndex =
+            normalizedRotation model.rotation (List.length model.accounts)
 
         selected =
-            List.head <| List.drop index model.accounts
+            List.head <| List.drop currentIndex model.accounts
     in
         text <|
             case selected of
@@ -258,14 +281,20 @@ circleAccountList model =
 
 circleAccountHtml : Model -> Account -> Int -> Html Msg
 circleAccountHtml model ( _, icon, url ) index =
-    li [ circularStyle model index ]
-        [ a
-            [ attribute "class" "button"
-            , attribute "href" url
-            , attribute "target" "_blank"
-            ]
-            [ i [ attribute "class" icon ] [] ]
-        ]
+    let
+        attributes =
+            case (index == normalizedRotation model.rotation (List.length model.accounts)) of
+                True ->
+                    [ attribute "href" url
+                    , attribute "target" "_blank"
+                    , attribute "class" "active"
+                    ]
+
+                False ->
+                    [ onClick <| RotateRingTo index ]
+    in
+        li [ circularStyle model index ]
+            [ a attributes [ i [ attribute "class" icon ] [] ] ]
 
 
 circularStyle : Model -> Int -> Html.Attribute msg

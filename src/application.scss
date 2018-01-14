@@ -75,17 +75,25 @@ html, body {
         position: absolute;
         top: 0;
         z-index: 2;
-        a.button {
-          margin: 8px 0;
+        a {
           width: 48px;
           height: 48px;
-          border-radius: 5px;
+          margin: 8px 0;
+          padding: 0;
           display: inline-block;
           text-align: center;
-          &:hover {
-            background: $accent-color;
+          border: none;
+          background: none;
+          cursor: pointer;
+          outline: none;
+          &.active:hover {
             > svg {
-              color: #fff;
+              color: #333;
+            }
+          }
+          &:hover {
+            > svg {
+              color: #aaa;
             }
           }
           > svg {
