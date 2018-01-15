@@ -1,6 +1,6 @@
 module Me exposing (..)
 
-import Html exposing (Html, div, text, strong, program, p, a, ul, li, i, img)
+import Html exposing (Html, div, text, strong, program, p, a, ul, li, i, img, footer, header, br)
 import Html.Attributes exposing (attribute, style)
 import Html.Events exposing (onClick, on)
 import Char exposing (fromCode)
@@ -191,24 +191,32 @@ view model =
         [ onWheel TakeWheel
         , attribute "id" "container"
         ]
-        [ div [ attribute "id" "content" ]
+        [ header [ style [ openedStyle model.ringOpened ], attribute "id" "selection" ] [ selectedAccountName model ]
+        , div [ attribute "id" "content" ]
             [ img [ attribute "src" MetaData.iconUrl, onClick ToggleRing ] []
             , p [ attribute "class" "name" ] [ text MetaData.myName ]
             , p [] (profilesLinksHtml MetaData.profiles)
             , ul [ openedClass model.ringOpened ] (circleAccountList model)
             , div [ style [ translateFromCenterStyle, openedStyle model.ringOpened ], attribute "id" "cursor" ] []
-            , p [ style [ translateFromCenterStyle, openedStyle model.ringOpened ], attribute "id" "selection" ] [ selectedAccountName model ]
+            ]
+        , footer []
+            [ text "© 2018 by Kengo Hamasaki"
+            , br [] []
+            , text "Made with "
+            , a [ attribute "href" "https://github.com/hmsk/hmsk.me", attribute "target" "_blank" ] [ text "Elm" ]
+            , text " and the respect for "
+            , a [ attribute "href" "https://en.wikipedia.org/wiki/Secret_of_Mana", attribute "target" "_blank" ] [ text "Secret of Mana" ]
             ]
         ]
 
 
 openedStyle : RingAppearance -> ( String, String )
 openedStyle opened =
-    ( "display"
+    ( "opacity"
     , if opened == Opened then
-        "block"
+        "1"
       else
-        "none"
+        "0"
     )
 
 
