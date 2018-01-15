@@ -122,12 +122,14 @@ a, img {
       border: 3px dotted $accent-color;
       border-radius: 2px;
       z-index: 1;
+      transition: opacity 0.5s;
     }
   }
   header {
     color: $accent-color;
     font-size: 25px;
     letter-spacing: -0.5px;
+    transition: opacity 0.5s;
   }
   footer {
     width: 80%;
