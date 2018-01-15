@@ -9,8 +9,6 @@ import Time exposing (millisecond)
 import Process exposing (sleep)
 import Task exposing (perform)
 import Json.Decode as Json
-import Touch exposing (..)
-import SingleTouch exposing (onMove)
 import MetaData exposing (..)
 
 
@@ -80,8 +78,6 @@ type Msg
     | AnimationEnd
     | TakeWheel Int
     | WheelUnlock
-    | TouchMoved Touch.Coordinates
-    | TouchReset
     | RotateRingTo Int
 
 
@@ -130,19 +126,6 @@ update msg model =
 
         ( WheelUnlock, _ ) ->
             ( { model | wheelLocked = False }, Cmd.none )
-
-        ( TouchMoved touch, _ ) ->
-            if model.lastTouch == ( 0, 0 ) then
-                ( { model | lastTouch = ( touch.clientX, touch.clientY ) }, Cmd.none )
-            else if touch.clientY - Tuple.second model.lastTouch > 50 then
-                ( { model | rotation = rotate model.rotation Clockwise, lastTouch = ( touch.clientX, touch.clientY ) }, delayedCmd TouchReset 50 )
-            else if touch.clientY - Tuple.second model.lastTouch < -50 then
-                ( { model | rotation = rotate model.rotation CounterClockwise, lastTouch = ( touch.clientX, touch.clientY ) }, delayedCmd TouchReset 50 )
-            else
-                ( model, Cmd.none )
-
-        ( TouchReset, _ ) ->
-            ( { model | lastTouch = ( 0, 0 ) }, Cmd.none )
 
         ( ToggleRing, Closed ) ->
             ( { model | ringOpened = AnimateToOpened }, delayedCmd AnimationEnd 20 )
@@ -206,7 +189,6 @@ view : Model -> Html Msg
 view model =
     div
         [ onWheel TakeWheel
-        , onMove TouchMoved
         , attribute "id" "container"
         ]
         [ div [ attribute "id" "content" ]
