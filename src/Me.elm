@@ -206,6 +206,9 @@ view model =
             , a [ attribute "href" "https://github.com/hmsk/hmsk.me", attribute "target" "_blank" ] [ text "Elm" ]
             , text " and the respect for "
             , a [ attribute "href" "https://en.wikipedia.org/wiki/Secret_of_Mana", attribute "target" "_blank" ] [ text "Secret of Mana" ]
+            , text "."
+            , br [] []
+            , text "You can toggle *Ring Command* by clicking the avatar."
             ]
         ]
 
