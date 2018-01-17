@@ -14,15 +14,16 @@
     <link rel="icon" type="image/png" sizes="96x96" href="/icons/icon-96.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/icons/icon-16png">
     <title>hmsk.me</title>
+    <script async src="./bundle.js"></script>
+    <script defer async src="https://www.googletagmanager.com/gtag/js?id=UA-31359162-1"></script>
+    <script defer>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'UA-31359162-1');
+    </script>
   </head>
   <body>
     <div id="me"></div>
-    <script src="./bundle.js" async></script>
-    <script defer>
-      var _gaq=[['_setAccount','UA-31359162-1'],['_trackPageview']];
-      (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
-      g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
-      s.parentNode.insertBefore(g,s)}(document,'script'));
-    </script>
   </body>
 </html>
