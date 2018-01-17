@@ -200,7 +200,7 @@ view model =
             , div [ style [ translateFromCenterStyle, openedStyle model.ringOpened ], attribute "id" "cursor" ] []
             ]
         , footer []
-            [ text "© 2018 by Kengo Hamasaki"
+            [ text "© 2018 Kengo Hamasaki"
             , br [] []
             , text "Made with "
             , a [ attribute "href" "https://github.com/hmsk/hmsk.me", attribute "target" "_blank" ] [ text "Elm" ]
