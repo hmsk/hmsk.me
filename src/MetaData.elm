@@ -29,7 +29,7 @@ accounts =
     , ( "Tumblr", "fab fa-tumblr-square", "https://hmsk.tumblr.com/" )
     , ( "Fitbit", "fas fa-heartbeat", "https://www.fitbit.com/user/243MYQ" )
     , ( "AngelList", "fab fa-angellist", "https://angel.co/hmsk" )
-    , ( "LinkedIn", "fab fa-linkedin", "https://www.linkedin.com/in/khmsk" )
+    , ( "LinkedIn", "fab fa-linkedin", "https://www.linkedin.com/in/hmsk" )
     , ( "Wishlist", "fas fa-gift", "https://www.amazon.co.jp/registry/wishlist/1U1J17EZM8CP1" )
     ]
 
