@@ -1,5 +1,4 @@
 import Elm from "./Me.elm";
-const root = document.getElementById("me");
-const app = Elm.Me.init({ node: root });
+Elm.Me.init({ node: document.getElementById("me") });
 
 import "./application.scss";
