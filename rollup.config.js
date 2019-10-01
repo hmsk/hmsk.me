@@ -1,4 +1,3 @@
-import resolve from "rollup-plugin-node-resolve";
 import commonjs from "rollup-plugin-commonjs";
 import sass from "rollup-plugin-sass";
 import elm from "rollup-plugin-elm";
@@ -7,7 +6,6 @@ import serve from "rollup-plugin-serve";
 import { terser } from "rollup-plugin-terser";
 
 const plugins = [
-  resolve(),
   sass({
     insert: true
   }),
