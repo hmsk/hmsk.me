@@ -221,9 +221,9 @@ view model =
             [ text "© 2019 Kengo Hamasaki"
             , br [] []
             , text "Made with "
-            , a [ attribute "href" "https://github.com/hmsk/hmsk.me", attribute "target" "_blank" ] [ text "Elm" ]
+            , a [ attribute "href" "https://github.com/hmsk/hmsk.me", attribute "target" "_blank", attribute "rel" "noopener"  ] [ text "Elm" ]
             , text " and the respect for "
-            , a [ attribute "href" "https://en.wikipedia.org/wiki/Secret_of_Mana", attribute "target" "_blank" ] [ text "Secret of Mana" ]
+            , a [ attribute "href" "https://en.wikipedia.org/wiki/Secret_of_Mana", attribute "target" "_blank", attribute "rel" "noopener" ] [ text "Secret of Mana" ]
             , text "."
             , br [] []
             , text "You can toggle *Ring Command* by clicking the avatar."
@@ -283,7 +283,7 @@ profilesLinksHtml accounts =
 
 profileLink : Account -> Html msg
 profileLink ( _, icon, url ) =
-    a [ attribute "href" url, attribute "target" "_blank" ]
+    a [ attribute "href" url, attribute "target" "_blank", attribute "rel" "noopener" ]
         [ i [ attribute "class" icon ] [] ]
 
 
@@ -301,6 +301,7 @@ circleAccountHtml model ( _, icon, url ) index =
                     [ attribute "href" url
                     , attribute "target" "_blank"
                     , attribute "class" "active"
+                    , attribute "rel" "noopener"
                     ]
 
                 False ->
