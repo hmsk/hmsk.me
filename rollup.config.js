@@ -20,8 +20,10 @@ const plugins = [
     extensions: [".js", ".elm"]
   }),
   copy({
-    "src/index.html": "dist/index.html",
-    "assets": "dist/",
+    targets: [
+      { src: "src/index.html", dest: "dist" },
+      { src: "assets/*", dest: "dist" }
+    ],
     verbose: true
   })
 ];
