@@ -13,6 +13,7 @@ const plugins = [
   elm({
     exclude: "elm_stuff/**",
     compiler: {
+      optimize: process.env.BUILD === "production",
       debug: process.env.BUILD !== "production"
     }
   }),
