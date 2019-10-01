@@ -4,6 +4,7 @@ import sass from "rollup-plugin-sass";
 import elm from "rollup-plugin-elm";
 import copy from "rollup-plugin-copy";
 import serve from "rollup-plugin-serve";
+import { terser } from "rollup-plugin-terser";
 
 const plugins = [
   resolve(),
@@ -20,6 +21,7 @@ const plugins = [
   commonjs({
     extensions: [".js", ".elm"]
   }),
+  terser(),
   copy({
     targets: [
       { src: "src/index.html", dest: "dist" },
