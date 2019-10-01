@@ -1,15 +1,15 @@
 module Me exposing (..)
 
-import Html exposing (Html, div, text, strong, program, p, a, ul, li, i, img, footer, header, br)
-import Html.Attributes exposing (attribute, style)
-import Html.Events exposing (onClick, on)
+import Browser exposing (document)
+import Browser.Events exposing (onKeyPress)
 import Char exposing (fromCode)
-import Keyboard exposing (presses)
-import Time exposing (millisecond)
+import Html exposing (Html, a, br, div, footer, header, i, img, li, p, strong, text, ul)
+import Html.Attributes exposing (attribute, style)
+import Html.Events exposing (on, onClick)
+import Json.Decode as Decode
+import MetaData exposing (..)
 import Process exposing (sleep)
 import Task exposing (perform)
-import Json.Decode as Json
-import MetaData exposing (..)
 
 
 type RingAppearance
@@ -28,10 +28,10 @@ radius =
 -- MAIN
 
 
-main : Program Never Model Msg
+main : Program () Model Msg
 main =
-    program
-        { init = init
+    Browser.element
+        { init = \_ -> init 1
         , view = view
         , update = update
         , subscriptions = subscriptions
@@ -51,8 +51,8 @@ type alias Model =
     }
 
 
-init : ( Model, Cmd Msg )
-init =
+init : flags -> ( Model, Cmd Msg )
+init flags =
     ( { accounts = MetaData.accounts
       , ringOpened = Closed
       , rotation = 0
@@ -65,7 +65,7 @@ init =
 
 delayedCmd : Msg -> Int -> Cmd Msg
 delayedCmd msg msec =
-    toFloat msec * millisecond |> Process.sleep |> Task.perform (\_ -> msg)
+    toFloat msec |> Process.sleep |> Task.perform (\_ -> msg)
 
 
 
@@ -97,7 +97,7 @@ update msg model =
         ( RotateRingTo index, Opened ) ->
             let
                 len =
-                    List.length (model.accounts)
+                    List.length model.accounts
 
                 currentIndex =
                     normalizedRotation model.rotation len
@@ -106,21 +106,25 @@ update msg model =
                     index - currentIndex
 
                 next =
-                    if toFloat (abs diff) < toFloat (len) / 2 then
+                    if toFloat (abs diff) < toFloat len / 2 then
                         diff
-                    else if toFloat (currentIndex) < toFloat (len) / 2 then
+
+                    else if toFloat currentIndex < toFloat len / 2 then
                         diff - len
+
                     else
                         diff + len
             in
-                -- Should express based on RotateDirection
-                ( { model | rotation = model.rotation + next }, Cmd.none )
+            -- Should express based on RotateDirection
+            ( { model | rotation = model.rotation + next }, Cmd.none )
 
         ( TakeWheel delta, Opened ) ->
             if not model.wheelLocked && delta > 20 then
                 ( { model | rotation = rotate model.rotation CounterClockwise, wheelLocked = True }, delayedCmd WheelUnlock 200 )
+
             else if not model.wheelLocked && delta < -20 then
                 ( { model | rotation = rotate model.rotation Clockwise, wheelLocked = True }, delayedCmd WheelUnlock 200 )
+
             else
                 ( model, Cmd.none )
 
@@ -162,23 +166,37 @@ normalizedRotation : Int -> Int -> Int
 normalizedRotation currentRotation listLength =
     let
         remainder =
-            abs currentRotation % listLength
+            modBy listLength (abs currentRotation)
     in
-        if currentRotation == 0 || remainder == 0 then
-            0
-        else if currentRotation < 0 then
-            listLength - remainder
-        else
-            remainder
+    if currentRotation == 0 || remainder == 0 then
+        0
+
+    else if currentRotation < 0 then
+        listLength - remainder
+
+    else
+        remainder
 
 
 
 -- SUBSCRIPTIONS
 
+keyDecoder : Decode.Decoder Msg
+keyDecoder =
+  Decode.map toKey (Decode.field "key" Decode.string)
+
+toKey : String -> Msg
+toKey string =
+  case String.uncons string of
+    Just (char, "") ->
+      Presses char
+
+    _ ->
+      Presses '?'
 
 subscriptions : Model -> Sub Msg
 subscriptions model =
-    Keyboard.presses (Presses << fromCode)
+    Browser.Events.onKeyPress (keyDecoder)
 
 
 
@@ -191,13 +209,13 @@ view model =
         [ onWheel TakeWheel
         , attribute "id" "container"
         ]
-        [ header [ style [ openedStyle model.ringOpened ], attribute "id" "selection" ] [ selectedAccountName model ]
+        [ header [ (\( a, b ) -> style a b) (openedStyle model.ringOpened), attribute "id" "selection" ] [ selectedAccountName model ]
         , div [ attribute "id" "content" ]
             [ img [ attribute "src" MetaData.iconUrl, onClick ToggleRing ] []
             , p [ attribute "class" "name" ] [ text MetaData.myName ]
             , p [] (profilesLinksHtml MetaData.profiles)
             , ul [ openedClass model.ringOpened ] (circleAccountList model)
-            , div [ style [ translateFromCenterStyle, openedStyle model.ringOpened ], attribute "id" "cursor" ] []
+            , div [ (\( a, b ) -> style a b) translateFromCenterStyle, (\( a, b ) -> style a b) (openedStyle model.ringOpened), attribute "id" "cursor" ] []
             ]
         , footer []
             [ text "© 2018 Kengo Hamasaki"
@@ -218,6 +236,7 @@ openedStyle opened =
     ( "opacity"
     , if opened == Opened then
         "1"
+
       else
         "0"
     )
@@ -228,6 +247,7 @@ openedClass opened =
     attribute "class"
         (if opened == Closed then
             ""
+
          else
             "opened"
         )
@@ -235,7 +255,7 @@ openedClass opened =
 
 translateFromCenterStyle : ( String, String )
 translateFromCenterStyle =
-    ( "transform", "translateY(" ++ toString (-1 * radius) ++ "px)" )
+    ( "transform", "translateY(" ++ String.fromInt (-1 * radius) ++ "px)" )
 
 
 selectedAccountName : Model -> Html Msg
@@ -247,13 +267,13 @@ selectedAccountName model =
         selected =
             List.head <| List.drop currentIndex model.accounts
     in
-        text <|
-            case selected of
-                Just ( name, _, _ ) ->
-                    name
+    text <|
+        case selected of
+            Just ( name, _, _ ) ->
+                name
 
-                Nothing ->
-                    ""
+            Nothing ->
+                ""
 
 
 profilesLinksHtml : List Account -> List (Html msg)
@@ -276,7 +296,7 @@ circleAccountHtml : Model -> Account -> Int -> Html Msg
 circleAccountHtml model ( _, icon, url ) index =
     let
         attributes =
-            case (index == normalizedRotation model.rotation (List.length model.accounts)) of
+            case index == normalizedRotation model.rotation (List.length model.accounts) of
                 True ->
                     [ attribute "href" url
                     , attribute "target" "_blank"
@@ -286,8 +306,8 @@ circleAccountHtml model ( _, icon, url ) index =
                 False ->
                     [ onClick <| RotateRingTo index ]
     in
-        li [ circularStyle model index ]
-            [ a attributes [ i [ attribute "class" icon ] [] ] ]
+    li [ circularStyle model index, transitionStyle ]
+        [ a attributes [ i [ attribute "class" icon ] [] ] ]
 
 
 circularStyle : Model -> Int -> Html.Attribute msg
@@ -297,30 +317,26 @@ circularStyle model index =
             List.length model.accounts
 
         one =
-            360 / toFloat (apexCount)
+            360 / toFloat apexCount
 
         ( rotatedDegree, distanceFromCenter ) =
             case model.ringOpened of
                 Opened ->
                     ( one * toFloat (index - model.rotation)
-                    , "translateY(-" ++ toString radius ++ "px)"
+                    , "translateY(-" ++ String.fromInt radius ++ "px)"
                     )
 
                 _ ->
                     ( one * toFloat (index - model.rotation - 2)
-                    , "translateY(-" ++ toString (radius + 500 + 660) ++ "px)"
+                    , "translateY(-" ++ String.fromInt (radius + 500 + 660) ++ "px)"
                     )
     in
-        style
-            [ ( "transform"
-              , "rotate(" ++ toString rotatedDegree ++ "deg) " ++ distanceFromCenter ++ "rotate(" ++ toString (rotatedDegree * -1) ++ "deg)"
-              )
-            , ( "transition"
-              , "0.50s ease-in-out"
-              )
-            ]
+    style "transform" ("rotate(" ++ String.fromFloat rotatedDegree ++ "deg) " ++ distanceFromCenter ++ "rotate(" ++ String.fromFloat (rotatedDegree * -1) ++ "deg)")
 
+transitionStyle : Html.Attribute msg
+transitionStyle =
+    style "transition" "0.50s ease-in-out"
 
 onWheel : (Int -> msg) -> Html.Attribute msg
 onWheel message =
-    on "wheel" (Json.map message (Json.at [ "deltaY" ] Json.int))
+    on "wheel" (Decode.map message (Decode.at [ "deltaY" ] Decode.int))
