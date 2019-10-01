@@ -1,4 +1,3 @@
-import commonjs from "rollup-plugin-commonjs";
 import sass from "rollup-plugin-sass";
 import elm from "rollup-plugin-elm";
 import copy from "rollup-plugin-copy";
@@ -15,9 +14,6 @@ const plugins = [
       optimize: process.env.BUILD === "production",
       debug: process.env.BUILD !== "production"
     }
-  }),
-  commonjs({
-    extensions: [".js", ".elm"]
   }),
   terser(),
   copy({
