@@ -1774,10 +1774,10 @@ rollup-plugin-copy@3.1.0:
     globby "10.0.1"
     is-plain-object "^3.0.0"
 
-rollup-plugin-elm@2.0.0:
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/rollup-plugin-elm/-/rollup-plugin-elm-2.0.0.tgz#9c715601e35537576abccc7896508d923d09256e"
-  integrity sha512-EYAtStPdSt2iSwwtlMQP2Qp/kKVdbf2zXbQkGiveHcN65iIu5BBZduA1VZRLEfEsqGq5nxosjzEzPWNqUiQZ1A==
+rollup-plugin-elm@2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/rollup-plugin-elm/-/rollup-plugin-elm-2.0.1.tgz#8855593e4c062d9f431ec83cfe993cf5f73d170b"
+  integrity sha512-uRELr1lvZ2wGrGJ3UwYdgAij5V5T5UnJlwXBptQqTpZubCxV0a2RhjiWFtgelJMIUOl9o7wOelTJaGevSL8fbQ==
   dependencies:
     node-elm-compiler "^5.0.1"
     rollup-pluginutils "^2.3.1"
