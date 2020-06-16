@@ -21,7 +21,7 @@ accounts =
     , ( "Give a coffee", "far fa-coffee-togo", "https://www.buymeacoffee.com/hmsk" )
     , ( "Blog (en)", "fab fa-medium-m", "https://medium.com/haiiro-io/tagged/code" )
     , ( "Blog (ja)", "far fa-edit", "https://hmsk.hatenablog.com" )
-    , ( "Essay (ja)", "far fa-pen-nib", "https://hmsk.hatenablog.jp" )
+    , ( "Essay (ja)", "far fa-pen-nib", "https://text.hmsk.me" )
     , ( "GitHub", "fab fa-github-alt", "https://github.com/hmsk" )
     , ( "Instagram", "fab fa-instagram", "https://instagram.com/hmsk" )
     , ( "Twitch", "fab fa-twitch", "https://www.twitch.tv/hmsk" )
