@@ -1,13 +1,12 @@
-module Me exposing (..)
+module Me exposing (main)
 
-import Browser exposing (document)
+import Browser exposing (element)
 import Browser.Events exposing (onKeyPress)
-import Char exposing (fromCode)
-import Html exposing (Html, a, br, div, footer, header, i, img, li, p, strong, text, ul, node)
+import Html exposing (Html, a, br, div, footer, header, img, li, p, text, ul)
 import Html.Attributes exposing (attribute, style)
 import Html.Events exposing (on, onClick)
 import Json.Decode as Decode
-import MetaData exposing (..)
+import MetaData exposing (Account, myName, iconUrl, accounts, profiles)
 import Process exposing (sleep)
 import Svg exposing (use, svg)
 import Svg.Attributes exposing (xlinkHref, viewBox)
@@ -32,7 +31,7 @@ radius =
 
 main : Program () Model Msg
 main =
-    Browser.element
+    element
         { init = \_ -> init 1
         , view = view
         , update = update
