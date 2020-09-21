@@ -17,25 +17,23 @@ iconUrl =
 
 accounts : List Account
 accounts =
-    [ ( "LinkedIn", "fab fa-linkedin-in", "https://www.linkedin.com/in/hmsk" )
-    , ( "Give a coffee", "far fa-coffee-togo", "https://www.buymeacoffee.com/hmsk" )
-    , ( "Blog (en)", "fab fa-medium-m", "https://medium.com/haiiro-io/tagged/code" )
-    , ( "Blog (ja)", "far fa-edit", "https://hmsk.hatenablog.com" )
-    , ( "Essay (ja)", "far fa-pen-nib", "https://text.hmsk.me" )
-    , ( "GitHub", "fab fa-github-alt", "https://github.com/hmsk" )
-    , ( "Instagram", "fab fa-instagram", "https://instagram.com/hmsk" )
-    , ( "Twitch", "fab fa-twitch", "https://www.twitch.tv/hmsk" )
-    , ( "500px", "fab fa-500px", "https://500px.com/hmsk" )
-    , ( "Twitter", "fab fa-twitter", "https://twitter.com/hmsk" )
-    , ( "Facebook", "fab fa-facebook", "https://facebook.com/hamachang" )
-    , ( "Fitbit", "far fa-running", "https://www.fitbit.com/user/243MYQ" )
-    , ( "AngelList", "fab fa-angellist", "https://angel.co/hmsk" )
-    , ( "Wish List", "far fa-gifts", "https://www.amazon.com/hz/wishlist/ls/273IUDAQJR4QQ" )
+    [ ( "LinkedIn", "linkedin-brands", "https://www.linkedin.com/in/hmsk" )
+    , ( "Give a coffee", "coffee-togo-duotone", "https://www.buymeacoffee.com/hmsk" )
+    , ( "Blog (en)", "medium-m-brands", "https://medium.com/haiiro-io/tagged/code" )
+    , ( "Essay (ja)", "pen-nib-duotone", "https://text.hmsk.me" )
+    , ( "GitHub", "github-brands", "https://github.com/hmsk" )
+    , ( "Instagram", "instagram-brands", "https://instagram.com/hmsk" )
+    , ( "Twitter", "twitter-brands", "https://twitter.com/hmsk" )
+    , ( "Facebook", "facebook-messenger-brands", "https://facebook.com/hamachang" )
+    , ( "Fitbit", "weight-duotone", "https://www.fitbit.com/user/243MYQ" )
+    , ( "500px", "images-duotone", "https://500px.com/hmsk" )
+    , ( "AngelList", "angellist-brands", "https://angel.co/hmsk" )
+    , ( "Wish List", "gifts-duotone", "https://www.amazon.com/hz/wishlist/ls/273IUDAQJR4QQ" )
     ]
 
 
 profiles : List Account
 profiles =
-    [ ( "key", "fad fa-fingerprint", "https://keybase.io/hmsk/key.asc" )
-    , ( "partner", "fad fa-rings-wedding", "https://namika.hmsk.co" )
+    [ ( "key", "fingerprint-duotone", "https://keybase.io/hmsk/key.asc" )
+    , ( "partner", "rings-wedding-duotone", "https://namika.hmsk.co" )
     ]

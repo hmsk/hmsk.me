@@ -3,12 +3,14 @@ module Me exposing (..)
 import Browser exposing (document)
 import Browser.Events exposing (onKeyPress)
 import Char exposing (fromCode)
-import Html exposing (Html, a, br, div, footer, header, i, img, li, p, strong, text, ul)
+import Html exposing (Html, a, br, div, footer, header, i, img, li, p, strong, text, ul, node)
 import Html.Attributes exposing (attribute, style)
 import Html.Events exposing (on, onClick)
 import Json.Decode as Decode
 import MetaData exposing (..)
 import Process exposing (sleep)
+import Svg exposing (use, svg)
+import Svg.Attributes exposing (xlinkHref, viewBox)
 import Task exposing (perform)
 
 
@@ -284,7 +286,11 @@ profilesLinksHtml accounts =
 profileLink : Account -> Html msg
 profileLink ( _, icon, url ) =
     a [ attribute "href" url, attribute "target" "_blank", attribute "rel" "noopener" ]
-        [ i [ attribute "class" icon ] [] ]
+        [
+            svg [ viewBox "0 0 32 32" ] [
+                use [ xlinkHref <| "sprites.svg#" ++ icon] []
+            ]
+        ]
 
 
 circleAccountList : Model -> List (Html Msg)
@@ -308,7 +314,11 @@ circleAccountHtml model ( _, icon, url ) index =
                     [ onClick <| RotateRingTo index ]
     in
     li [ circularStyle model index, transitionStyle ]
-        [ a attributes [ i [ attribute "class" icon ] [] ] ]
+        [ a attributes [
+            svg [ viewBox "0 0 32 32" ] [
+                use [ xlinkHref <| "sprites.svg#" ++ icon] []
+            ]
+        ] ]
 
 
 circularStyle : Model -> Int -> Html.Attribute msg
