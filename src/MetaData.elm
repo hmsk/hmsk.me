@@ -25,7 +25,6 @@ accounts =
     , ( "Instagram", "instagram-brands", "https://instagram.com/hmsk" )
     , ( "Twitter", "twitter-brands", "https://twitter.com/hmsk" )
     , ( "Facebook", "facebook-messenger-brands", "https://m.me/hamachang" )
-    , ( "Fitbit", "weight-duotone", "https://www.fitbit.com/user/243MYQ" )
     , ( "Photos (Flickr)", "images-duotone", "https://flickr.com/hmsk" )
     , ( "AngelList", "angellist-brands", "https://angel.co/hmsk" )
     , ( "Send a gift", "gifts-duotone", "https://www.amazon.com/hz/wishlist/ls/273IUDAQJR4QQ" )
