@@ -1,7 +1,7 @@
 module Me exposing (main)
 
 import Browser exposing (element)
-import Browser.Events exposing (onKeyPress)
+import Browser.Events exposing (onKeyPress, onVisibilityChange, Visibility(..))
 import Html exposing (Html, a, br, div, footer, header, img, li, p, text, ul)
 import Html.Attributes exposing (attribute, style)
 import Html.Events exposing (on, onClick)
@@ -60,7 +60,7 @@ init _ =
       , wheelLocked = False
       , lastTouch = ( 0, 0 )
       }
-    , Cmd.none
+    , delayedCmd Open 0
     )
 
 
@@ -80,6 +80,8 @@ type Msg
     | TakeWheel Int
     | WheelUnlock
     | RotateRingTo Int
+    | Open
+    | None
 
 
 
@@ -144,6 +146,12 @@ update msg model =
         ( AnimationEnd, AnimateToClosed ) ->
             ( { model | ringOpened = Closed }, Cmd.none )
 
+        ( Open, Closed ) ->
+            ( model, delayedCmd ToggleRing 500 )
+
+        ( Open, Opened ) ->
+            ( { model | ringOpened = Closed }, delayedCmd Open 10 )
+
         _ ->
             ( model, Cmd.none )
 
@@ -197,10 +205,20 @@ toKey string =
         _ ->
             Presses '?'
 
+toggleIfTabGetsVisible : Visibility -> Msg
+toggleIfTabGetsVisible visibility =
+    case visibility of
+        Visible ->
+            Open
+        Hidden ->
+            None
 
 subscriptions : Model -> Sub Msg
 subscriptions _ =
-    onKeyPress keyDecoder
+    Sub.batch
+    [ onKeyPress keyDecoder
+    , onVisibilityChange toggleIfTabGetsVisible
+    ]
 
 
 
@@ -322,6 +340,7 @@ svgSpriteIcon iconName =
     svg [ viewBox "0 0 32 32" ]
         [ use [ xlinkHref <| "sprites.svg#" ++ iconName ] []
         ]
+
 
 circularStyle : Model -> Int -> Html.Attribute msg
 circularStyle model index =
