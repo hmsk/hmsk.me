@@ -6,10 +6,10 @@ import Html exposing (Html, a, br, div, footer, header, img, li, p, text, ul)
 import Html.Attributes exposing (attribute, style)
 import Html.Events exposing (on, onClick)
 import Json.Decode as Decode
-import MetaData exposing (Account, myName, iconUrl, accounts, profiles)
+import MetaData exposing (Account, accounts, iconUrl, myName, profiles)
 import Process exposing (sleep)
-import Svg exposing (use, svg)
-import Svg.Attributes exposing (xlinkHref, viewBox)
+import Svg exposing (svg, use)
+import Svg.Attributes exposing (viewBox, xlinkHref)
 import Task exposing (perform)
 
 
@@ -53,7 +53,7 @@ type alias Model =
 
 
 init : flags -> ( Model, Cmd Msg )
-init flags =
+init _ =
     ( { accounts = MetaData.accounts
       , ringOpened = Closed
       , rotation = 0
@@ -182,22 +182,25 @@ normalizedRotation currentRotation listLength =
 
 -- SUBSCRIPTIONS
 
+
 keyDecoder : Decode.Decoder Msg
 keyDecoder =
-  Decode.map toKey (Decode.field "key" Decode.string)
+    Decode.map toKey (Decode.field "key" Decode.string)
+
 
 toKey : String -> Msg
 toKey string =
-  case String.uncons string of
-    Just (char, "") ->
-      Presses char
+    case String.uncons string of
+        Just ( char, "" ) ->
+            Presses char
 
-    _ ->
-      Presses '?'
+        _ ->
+            Presses '?'
+
 
 subscriptions : Model -> Sub Msg
-subscriptions model =
-    Browser.Events.onKeyPress (keyDecoder)
+subscriptions _ =
+    onKeyPress keyDecoder
 
 
 
@@ -222,7 +225,7 @@ view model =
             [ text "© 2013 - 2020 Kengo Hamasaki"
             , br [] []
             , text "Made with "
-            , a [ attribute "href" "https://github.com/hmsk/hmsk.me", attribute "target" "_blank", attribute "rel" "noopener"  ] [ text "Elm" ]
+            , a [ attribute "href" "https://github.com/hmsk/hmsk.me", attribute "target" "_blank", attribute "rel" "noopener" ] [ text "Elm" ]
             , text " and the respect for "
             , a [ attribute "href" "https://en.wikipedia.org/wiki/Secret_of_Mana", attribute "target" "_blank", attribute "rel" "noopener" ] [ text "Secret of Mana" ]
             , text "."
@@ -285,10 +288,7 @@ profilesLinksHtml accounts =
 profileLink : Account -> Html msg
 profileLink ( _, icon, url ) =
     a [ attribute "href" url, attribute "target" "_blank", attribute "rel" "noopener" ]
-        [
-            svg [ viewBox "0 0 32 32" ] [
-                use [ xlinkHref <| "sprites.svg#" ++ icon] []
-            ]
+        [ svgSpriteIcon icon
         ]
 
 
@@ -301,24 +301,27 @@ circleAccountHtml : Model -> Account -> Int -> Html Msg
 circleAccountHtml model ( _, icon, url ) index =
     let
         attributes =
-            case index == normalizedRotation model.rotation (List.length model.accounts) of
-                True ->
-                    [ attribute "href" url
-                    , attribute "target" "_blank"
-                    , attribute "class" "active"
-                    , attribute "rel" "noopener"
-                    ]
+            if index == normalizedRotation model.rotation (List.length model.accounts) then
+                [ attribute "href" url
+                , attribute "target" "_blank"
+                , attribute "class" "active"
+                , attribute "rel" "noopener"
+                ]
 
-                False ->
-                    [ onClick <| RotateRingTo index ]
+            else
+                [ onClick <| RotateRingTo index ]
     in
     li [ circularStyle model index, transitionStyle ]
-        [ a attributes [
-            svg [ viewBox "0 0 32 32" ] [
-                use [ xlinkHref <| "sprites.svg#" ++ icon] []
-            ]
-        ] ]
+        [ a attributes
+            [ svgSpriteIcon icon ]
+        ]
 
+
+svgSpriteIcon : String -> Html msg
+svgSpriteIcon iconName =
+    svg [ viewBox "0 0 32 32" ]
+        [ use [ xlinkHref <| "sprites.svg#" ++ iconName ] []
+        ]
 
 circularStyle : Model -> Int -> Html.Attribute msg
 circularStyle model index =
@@ -343,9 +346,11 @@ circularStyle model index =
     in
     style "transform" ("rotate(" ++ String.fromFloat rotatedDegree ++ "deg) " ++ distanceFromCenter ++ "rotate(" ++ String.fromFloat (rotatedDegree * -1) ++ "deg)")
 
+
 transitionStyle : Html.Attribute msg
 transitionStyle =
     style "transition" "0.50s ease-in-out"
+
 
 onWheel : (Int -> msg) -> Html.Attribute msg
 onWheel message =
