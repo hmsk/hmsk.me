@@ -26,9 +26,9 @@ accounts =
     , ( "Twitter", "twitter-brands", "https://twitter.com/hmsk" )
     , ( "Facebook", "facebook-messenger-brands", "https://facebook.com/hamachang" )
     , ( "Fitbit", "weight-duotone", "https://www.fitbit.com/user/243MYQ" )
-    , ( "500px", "images-duotone", "https://500px.com/hmsk" )
+    , ( "Photos (Flickr)", "images-duotone", "https://flickr.com/hmsk" )
     , ( "AngelList", "angellist-brands", "https://angel.co/hmsk" )
-    , ( "Wish List", "gifts-duotone", "https://www.amazon.com/hz/wishlist/ls/273IUDAQJR4QQ" )
+    , ( "Send a gift", "gifts-duotone", "https://www.amazon.com/hz/wishlist/ls/273IUDAQJR4QQ" )
     ]
 
 
