@@ -54,7 +54,7 @@ type alias Model =
 
 init : flags -> ( Model, Cmd Msg )
 init _ =
-    ( { accounts = MetaData.accounts
+    ( { accounts = accounts
       , ringOpened = Closed
       , rotation = 0
       , wheelLocked = False
@@ -233,9 +233,9 @@ view model =
         ]
         [ header [ (\( a, b ) -> style a b) (openedStyle model.ringOpened), attribute "id" "selection" ] [ selectedAccountName model ]
         , div [ attribute "id" "content" ]
-            [ img [ attribute "src" MetaData.iconUrl, onClick ToggleRing ] []
-            , p [ attribute "class" "name" ] [ text MetaData.myName ]
-            , p [] (profilesLinksHtml MetaData.profiles)
+            [ img [ attribute "src" iconUrl, onClick ToggleRing ] []
+            , p [ attribute "class" "name" ] [ text myName ]
+            , p [] (profilesLinksHtml profiles)
             , ul [ openedClass model.ringOpened ] (circleAccountList model)
             , div [ (\( a, b ) -> style a b) translateFromCenterStyle, (\( a, b ) -> style a b) (openedStyle model.ringOpened), attribute "id" "cursor" ] []
             ]

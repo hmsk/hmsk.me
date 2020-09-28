@@ -1,4 +1,4 @@
-module MetaData exposing (..)
+module MetaData exposing (Account, myName, iconUrl, accounts, profiles)
 
 
 type alias Account =
