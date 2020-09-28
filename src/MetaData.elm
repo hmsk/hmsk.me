@@ -19,10 +19,11 @@ accounts : List Account
 accounts =
     [ ( "LinkedIn", "linkedin-brands", "https://www.linkedin.com/in/hmsk" )
     , ( "Give a coffee", "coffee-togo-duotone", "https://www.buymeacoffee.com/hmsk" )
-    , ( "Blog (en)", "medium-m-brands", "https://medium.com/haiiro-io/tagged/code" )
+    , ( "Blog", "medium-m-brands", "https://medium.com/haiiro-io/tagged/code" )
     , ( "Essay (ja)", "pen-nib-duotone", "https://text.hmsk.me" )
     , ( "GitHub", "github-brands", "https://github.com/hmsk" )
     , ( "Instagram", "instagram-brands", "https://instagram.com/hmsk" )
+    , ( "Podcast (ja)", "podcast-duotone", "https://anchor.fm/hmsk" )
     , ( "Twitter", "twitter-brands", "https://twitter.com/hmsk" )
     , ( "Facebook", "facebook-messenger-brands", "https://m.me/hamachang" )
     , ( "Photos (Flickr)", "images-duotone", "https://flickr.com/hmsk" )
