@@ -24,7 +24,7 @@ const plugins = [
   copy({
     targets: [
       { src: "src/index.html", dest: "dist" },
-      { src: "assets/*", dest: "dist" }
+      { src: ["assets/*", "!assets/svg"], dest: "dist" }
     ],
     verbose: true
   })
