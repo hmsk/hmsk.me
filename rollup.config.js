@@ -2,14 +2,9 @@ import sass from "rollup-plugin-sass";
 import elm from "rollup-plugin-elm";
 import copy from "rollup-plugin-copy";
 import serve from "rollup-plugin-serve";
-import svgSprite from "rollup-plugin-svg-sprite";
 import { terser } from "rollup-plugin-terser";
 
 const plugins = [
-  svgSprite({
-    outputFolder: 'dist',
-    minify: false
-  }),
   sass({
     insert: true
   }),
@@ -24,7 +19,7 @@ const plugins = [
   copy({
     targets: [
       { src: "src/index.html", dest: "dist" },
-      { src: ["assets/*", "!assets/svg"], dest: "dist" }
+      { src: ["assets/*"], dest: "dist" }
     ],
     verbose: true
   })
