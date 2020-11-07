@@ -8,8 +8,6 @@ import "../assets/svg/facebook-messenger-brands.svg";
 import "../assets/svg/coffee-togo-duotone.svg";
 import "../assets/svg/gifts-duotone.svg";
 import "../assets/svg/pen-nib-duotone.svg";
-import "../assets/svg/rings-wedding-duotone.svg";
-import "../assets/svg/fingerprint-duotone.svg";
 import "../assets/svg/podcast-duotone.svg";
 
 import Elm from "./Me.elm";

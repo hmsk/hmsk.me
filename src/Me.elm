@@ -298,15 +298,15 @@ selectedAccountName model =
                 ""
 
 
-profilesLinksHtml : List Account -> List (Html msg)
+profilesLinksHtml : List (String, Html msg, String) -> List (Html msg)
 profilesLinksHtml accounts =
     List.map profileLink accounts
 
 
-profileLink : Account -> Html msg
+profileLink : (String, Html msg, String) -> Html msg
 profileLink ( _, icon, url ) =
     a [ attribute "href" url, attribute "target" "_blank", attribute "rel" "noopener" ]
-        [ svgSpriteIcon icon
+        [ icon
         ]
 
 
