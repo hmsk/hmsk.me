@@ -6,7 +6,7 @@ import Html exposing (Html, a, br, div, footer, header, img, li, p, text, ul)
 import Html.Attributes exposing (attribute, style)
 import Html.Events exposing (on, onClick)
 import Json.Decode as Decode
-import MetaData exposing (Account, accounts, iconUrl, myName, profiles)
+import MetaData exposing (accounts, iconUrl, myName, profiles)
 import Process exposing (sleep)
 import Svg exposing (svg, use)
 import Svg.Attributes exposing (viewBox, xlinkHref)
@@ -44,7 +44,7 @@ main =
 
 
 type alias Model =
-    { accounts : List Account
+    { accounts : List ( String, Html Msg, String )
     , ringOpened : RingAppearance
     , rotation : Int
     , wheelLocked : Bool
@@ -315,7 +315,7 @@ circleAccountList model =
     List.indexedMap (\index account -> circleAccountHtml model account index) accounts
 
 
-circleAccountHtml : Model -> Account -> Int -> Html Msg
+circleAccountHtml : Model -> ( String, Html Msg, String ) -> Int -> Html Msg
 circleAccountHtml model ( _, icon, url ) index =
     let
         attributes =
@@ -331,7 +331,7 @@ circleAccountHtml model ( _, icon, url ) index =
     in
     li [ circularStyle model index, transitionStyle ]
         [ a attributes
-            [ svgSpriteIcon icon ]
+            [ icon ]
         ]
 
 
