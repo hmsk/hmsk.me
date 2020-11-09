@@ -2,12 +2,12 @@ $accent-color: #325d72;
 
 @font-face {
   font-family: 'PressStart2P';
-  src: url('/ps2.ttf') format('truetype');
+  src: url('/assets/ps2.ttf') format('truetype');
 }
 
 html, body {
   font-family: 'PressStart2P', 'Helvetica', sans-serif;
-  background: url('/background.png');
+  background: url('/assets/background.png');
   background-repeat: repeat;
   height: 100%;
   margin: 0;
