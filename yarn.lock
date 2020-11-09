@@ -2391,7 +2391,7 @@ verror@1.10.0:
     core-util-is "1.0.2"
     extsprintf "^1.2.0"
 
-vite-plugin-elm@^1.0.0-rc.5:
+vite-plugin-elm@1.0.0-rc.5:
   version "1.0.0-rc.5"
   resolved "https://registry.yarnpkg.com/vite-plugin-elm/-/vite-plugin-elm-1.0.0-rc.5.tgz#8f596d913b4d644558ee504166ef1e2c6d844dd6"
   integrity sha512-s3X2f6b7mnhTCz3Fqo30NZszitPypDF/xRwFxO73Y5+0RypLDkFKsjxDxNljDjDvham/zBIroyKr58mtXpZ1Fw==
@@ -2399,7 +2399,7 @@ vite-plugin-elm@^1.0.0-rc.5:
     elm-esm "1.1.1"
     node-elm-compiler "5.0.5"
 
-vite@^1.0.0-rc.9:
+vite@1.0.0-rc.9:
   version "1.0.0-rc.9"
   resolved "https://registry.yarnpkg.com/vite/-/vite-1.0.0-rc.9.tgz#63621a39cf36fe9a6dccafdb11360a5ebbdb2663"
   integrity sha512-u0PT2sKMes2RtE5rZsLY0nFm6kEmce7IhVRWKFXmrsjn0MBOCNEi+S6iNnJDmsj1nzvU2dMZ5MHhFyXIqTgjzA==
