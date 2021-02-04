@@ -166,10 +166,10 @@ elm@0.19.1-3:
   dependencies:
     request "^2.88.0"
 
-esbuild@^0.8.26:
-  version "0.8.31"
-  resolved "https://registry.yarnpkg.com/esbuild/-/esbuild-0.8.31.tgz#c21e7adb3ad283c951a53de7ad64a5ae2df2ed34"
-  integrity sha512-7EIU0VdUxltwivjVezX3HgeNzeIVR1snkrAo57WdUnuBMykdzin5rTrxwCDM6xQqj0RL/HjOEm3wFr2ijHKeaA==
+esbuild@^0.8.34:
+  version "0.8.40"
+  resolved "https://registry.yarnpkg.com/esbuild/-/esbuild-0.8.40.tgz#2ca457d950b27c77f28010f4482bdb820560290f"
+  integrity sha512-IP0GcO3K9yO9rM69AMtx9tmjUYFO7oCcRfURCV4KveL3HQnQA1SJ8YLM71EyFe67+7At6HJIyjkOjGO3xnUQ/g==
 
 extend@~3.0.2:
   version "3.0.2"
@@ -669,12 +669,12 @@ vite-plugin-elm@2.0.0-beta.2:
     elm-esm "1.1.2"
     node-elm-compiler "5.0.5"
 
-vite@2.0.0-beta.15:
-  version "2.0.0-beta.15"
-  resolved "https://registry.yarnpkg.com/vite/-/vite-2.0.0-beta.15.tgz#cd2f1037b4767538839b4c6b4f71a1f9512c7654"
-  integrity sha512-S+NRqL+/QZooWbshnB/Rht1Ln0ldyUcGwghwprvmzI4fXAfM0rFU5g6uno0DdueYnHn0jDO3ExQktGyQuNb9Ww==
+vite@2.0.0-beta.64:
+  version "2.0.0-beta.64"
+  resolved "https://registry.yarnpkg.com/vite/-/vite-2.0.0-beta.64.tgz#245cabc72335911d4cb704545f713d47e880d84f"
+  integrity sha512-/dR5rOXohhdXfkAIBAjmwX7JmoMWhQc7+VI6/EjyqXQCQzREmfBztLgTk/rPkmsNY87Cd71u9b+nlbcYK4TDCA==
   dependencies:
-    esbuild "^0.8.26"
+    esbuild "^0.8.34"
     postcss "^8.2.1"
     resolve "^1.19.0"
     rollup "^2.35.1"
