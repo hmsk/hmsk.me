@@ -12,8 +12,8 @@
   },
   "devDependencies": {
     "elm": "0.19.1-5",
-    "sass": "1.32.13",
-    "vite": "2.3.3",
-    "vite-plugin-elm": "2.2.0"
+    "sass": "1.34.0",
+    "vite": "2.3.4",
+    "vite-plugin-elm": "2.3.0"
   }
 }
