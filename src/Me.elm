@@ -1,7 +1,7 @@
 module Me exposing (main)
 
 import Browser exposing (element)
-import Browser.Events exposing (onKeyPress, onVisibilityChange, Visibility(..))
+import Browser.Events exposing (Visibility(..), onKeyPress, onVisibilityChange)
 import Html exposing (Html, a, br, div, footer, header, img, li, p, text, ul)
 import Html.Attributes exposing (attribute, style)
 import Html.Events exposing (on, onClick)
@@ -66,7 +66,7 @@ init _ =
 
 delayedCmd : Msg -> Int -> Cmd Msg
 delayedCmd msg msec =
-    toFloat msec |> Process.sleep |> Task.perform (\_ -> msg)
+    toFloat msec |> sleep |> perform (\_ -> msg)
 
 
 
@@ -205,20 +205,23 @@ toKey string =
         _ ->
             Presses '?'
 
+
 toggleIfTabGetsVisible : Visibility -> Msg
 toggleIfTabGetsVisible visibility =
     case visibility of
         Visible ->
             Open
+
         Hidden ->
             None
+
 
 subscriptions : Model -> Sub Msg
 subscriptions _ =
     Sub.batch
-    [ onKeyPress keyDecoder
-    , onVisibilityChange toggleIfTabGetsVisible
-    ]
+        [ onKeyPress keyDecoder
+        , onVisibilityChange toggleIfTabGetsVisible
+        ]
 
 
 
@@ -298,12 +301,12 @@ selectedAccountName model =
                 ""
 
 
-profilesLinksHtml : List (String, Html msg, String) -> List (Html msg)
+profilesLinksHtml : List ( String, Html msg, String ) -> List (Html msg)
 profilesLinksHtml accounts =
     List.map profileLink accounts
 
 
-profileLink : (String, Html msg, String) -> Html msg
+profileLink : ( String, Html msg, String ) -> Html msg
 profileLink ( _, icon, url ) =
     a [ attribute "href" url, attribute "target" "_blank", attribute "rel" "noopener" ]
         [ icon
