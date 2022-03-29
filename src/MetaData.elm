@@ -4,6 +4,7 @@ import Html exposing (Html)
 import Svg exposing (g, svg)
 import Svg.Attributes exposing (class, d, fill, opacity, viewBox)
 
+
 myName : String
 myName =
     "@hmsk"
@@ -11,7 +12,7 @@ myName =
 
 iconUrl : String
 iconUrl =
-    "https://www.gravatar.com/avatar/8358fe546d1b082b163f18a02eec145d?s=320"
+    "[ELM_VITE_PLUGIN_ASSET_PATH_DYNAMIC:/assets/avatar.jpg]"
 
 
 accounts : List ( String, Html msg, String )
