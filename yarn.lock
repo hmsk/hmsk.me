@@ -2,6 +2,16 @@
 # yarn lockfile v1
 
 
+acorn-walk@^8.0.0:
+  version "8.2.0"
+  resolved "https://registry.yarnpkg.com/acorn-walk/-/acorn-walk-8.2.0.tgz#741210f2e2426454508853a2f44d0ab83b7f69c1"
+  integrity sha512-k+iyHEuPgSw6SbuDpGQM+06HQUa04DZ3o+F6CSzXMvvI5KMvnaEqXe+YVe555R9nn6GPt404fos4wcgpw12SDA==
+
+acorn@^8.0.0:
+  version "8.7.0"
+  resolved "https://registry.yarnpkg.com/acorn/-/acorn-8.7.0.tgz#90951fde0f8f09df93549481e5fc141445b791cf"
+  integrity sha512-V/LGr1APy+PXIwKebEWrkZPwoeoF+w1jiOBUmuxuiUIaOHtob8Qc9BTrYo7VuI5fR8tqsy+buA2WFooR5olqvQ==
+
 ajv@^6.5.5:
   version "6.10.2"
   resolved "https://registry.npmjs.org/ajv/-/ajv-6.10.2.tgz"
@@ -795,11 +805,13 @@ verror@1.10.0:
     core-util-is "1.0.2"
     extsprintf "^1.2.0"
 
-vite-plugin-elm@2.6.0-beta.1:
-  version "2.6.0-beta.1"
-  resolved "https://registry.yarnpkg.com/vite-plugin-elm/-/vite-plugin-elm-2.6.0-beta.1.tgz#694d147718c5b9a74a09f17fa63b75019cec4fe3"
-  integrity sha512-unEXObgA409Lsm1CzaRocraoiu70XzA9TFOsSRf+Caixz2omzx7kx2JxeWQLCuFKCtmTvoI9qoaMQMEt3RNO6g==
+vite-plugin-elm@2.6.0-beta.4:
+  version "2.6.0-beta.4"
+  resolved "https://registry.yarnpkg.com/vite-plugin-elm/-/vite-plugin-elm-2.6.0-beta.4.tgz#26ca0cd130c0a62d6ac32a4fb7ddc567de17db60"
+  integrity sha512-tIusk4SH3HNXghU9zo3bsEZz922xPn99usEFL61XV+tGviefkzSJN52bAzQD4ozL1gLSm50U7UXyjKNDK1JIEg==
   dependencies:
+    acorn "^8.0.0"
+    acorn-walk "^8.0.0"
     elm-esm "1.1.4"
     node-elm-compiler "5.0.6"
 

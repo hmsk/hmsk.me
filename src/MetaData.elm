@@ -3,6 +3,7 @@ module MetaData exposing (accounts, iconUrl, myName, profiles)
 import Html exposing (Html)
 import Svg exposing (g, svg)
 import Svg.Attributes exposing (class, d, fill, opacity, viewBox)
+import VitePluginHelper exposing (asset)
 
 
 myName : String
@@ -12,7 +13,7 @@ myName =
 
 iconUrl : String
 iconUrl =
-    "[ELM_VITE_PLUGIN_ASSET_PATH_DYNAMIC:/assets/avatar.jpg]"
+    asset "/assets/avatar.jpg?inline"
 
 
 accounts : List ( String, Html msg, String )
