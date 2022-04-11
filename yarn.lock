@@ -805,10 +805,10 @@ verror@1.10.0:
     core-util-is "1.0.2"
     extsprintf "^1.2.0"
 
-vite-plugin-elm@2.6.0-beta.5:
-  version "2.6.0-beta.5"
-  resolved "https://registry.yarnpkg.com/vite-plugin-elm/-/vite-plugin-elm-2.6.0-beta.5.tgz#1c728b4fa7bc5e079c2d7565c291354fc023b543"
-  integrity sha512-oXss0E91u7/ejG7Ki0TpG48/YtYaP3c5JZ3pQI/t9w5sEuiPQ2USamf9JUOIQ4CZ3WwLBzUsDIkjM2w7nf7ZFA==
+vite-plugin-elm@2.6.0:
+  version "2.6.0"
+  resolved "https://registry.yarnpkg.com/vite-plugin-elm/-/vite-plugin-elm-2.6.0.tgz#44096ce328a1fe8b27ff59e41ae547844c35e676"
+  integrity sha512-vUGxxlXJA8f9ruL9v2LxR/7pMn3+5yl62bVrFLMMnL3ka4m8igwhhyJw8XDmXrnqCVf8q9CzjqCoOgRzSvmCXA==
   dependencies:
     acorn "^8.0.0"
     acorn-walk "^8.0.0"
