@@ -4,3 +4,8 @@
 [build.environment]
   NODE_VERSION = "16.17.0"
   YARN_VERSION = "1.22.19"
+[[redirects]]
+  from = "https://hmsk.me/more"
+  to = "https://text.hmsk.me/more"
+  status = 302
+  force = true
