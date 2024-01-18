@@ -1,4 +1,4 @@
-import { plugin as elmPlugin } from 'vite-plugin-elm'
+import elmPlugin from 'vite-plugin-elm'
 
 const config = {
   build: {
