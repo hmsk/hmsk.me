@@ -634,10 +634,10 @@ unicorn-magic@^0.1.0:
   resolved "https://registry.yarnpkg.com/unicorn-magic/-/unicorn-magic-0.1.0.tgz#1bb9a51c823aaf9d73a8bfcd3d1a23dde94b0ce4"
   integrity sha512-lRfVq8fE8gz6QMBuDM6a+LO3IAzTi05H6gCVaUpir2E1Rwpo4ZUog45KpNXKC/Mn3Yb9UDuHumeFTo9iV/D9FQ==
 
-vite-plugin-elm@3.0.0-0:
-  version "3.0.0-0"
-  resolved "https://registry.yarnpkg.com/vite-plugin-elm/-/vite-plugin-elm-3.0.0-0.tgz#6bf289a87e77c65c0d76f5e00b7634086e83b107"
-  integrity sha512-2u1Bn/P5ca296X5wAb9IE2bxT7JQxDlmJlIuINFQ7hPyiw5A2AcDHVwMa45tCaLcPsdbq75bEIKiD0R4+yZvMg==
+vite-plugin-elm@3.0.0-1:
+  version "3.0.0-1"
+  resolved "https://registry.yarnpkg.com/vite-plugin-elm/-/vite-plugin-elm-3.0.0-1.tgz#5d2b47a2d309e70a046d82e8099544bf4291c204"
+  integrity sha512-G7R9sV0wxuJsuBRtdPMhgfDVWQ8rTe5qq2fFqPP947zD+XhDcaMNaQG76NHxpGa+IhU9qUEESqpFb7hlaXug9g==
   dependencies:
     acorn "^8.0.0"
     acorn-walk "^8.0.0"
