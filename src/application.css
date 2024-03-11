@@ -1,4 +1,6 @@
-$accent-color: #325d72;
+:root {
+  --accent-color: #325d72;
+}
 
 @font-face {
   font-family: 'PressStart2P';
@@ -35,10 +37,10 @@ a, img {
     p {
       margin-top: 15px;
       margin-bottom: 5px;
-      color: $accent-color;
+      color: var(--accent-color);
       text-align: center;
       a {
-        color: $accent-color;
+        color: var(--accent-color);
         text-decoration: none;
         &:hover {
           color: #aaa;
@@ -107,7 +109,7 @@ a, img {
             height: 25px;
             width: 25px;
             margin-top: 11px;
-            color: $accent-color;
+            color: var(--accent-color);
           }
         }
       }
@@ -121,14 +123,14 @@ a, img {
       right: 0;
       margin: 0 auto;
       padding: 0;
-      border: 3px dotted $accent-color;
+      border: 3px dotted var(--accent-color);
       border-radius: 2px;
       z-index: 1;
       transition: opacity 0.5s;
     }
   }
   header {
-    color: $accent-color;
+    color: var(--accent-color);
     font-size: 2.8vh;
     letter-spacing: -0.5px;
     transition: opacity 0.5s;
@@ -136,14 +138,14 @@ a, img {
   }
   footer {
     width: 92%;
-    color: $accent-color;
+    color: var(--accent-color);
     text-align: center;
     font-size: 1.1vh;
     line-height: 1.6vh;
     letter-spacing: -0.5px;
     margin-bottom: 3vh;
     a {
-      color: $accent-color;
+      color: var(--accent-color);
     }
   }
 }
