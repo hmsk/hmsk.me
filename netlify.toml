@@ -2,7 +2,7 @@
   command = "yarn build"
   publish = "dist"
 [build.environment]
-  NODE_VERSION = "18.19.0"
+  NODE_VERSION = "24"
   YARN_VERSION = "1.22.21"
 [[redirects]]
   from = "https://hmsk.me/more"
