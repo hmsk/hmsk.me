@@ -14,7 +14,7 @@
   "devDependencies": {
     "elm": "0.19.1-6",
     "vite": "8.3.7",
-    "vite-plugin-elm": "4.0.0-0"
+    "vite-plugin-elm": "4.0.0-1"
   },
   "packageManager": "yarn@4.1.1"
 }
